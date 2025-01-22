@@ -39,3 +39,289 @@ export const  fetchLogin = async (data) => {
     throw error;
   }
 };
+
+export const fetchAnalyticRequest = async (id) => {
+  try {
+    const authToken = getAuthToken();
+    let url = id
+    ? `${BASE_URL}dashboard/Counter?companyID=${id}`
+    : `${BASE_URL}dashboard/Counter`;
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+
+    const data = await response.json();
+  
+      const res = data;
+   return  res;
+  } catch (error) {
+    console.error('Error fetching Analytic Request:', error); 
+    return { success: false, error: 'Error fetching Analytic Request' };
+  }
+};
+
+export const fetchTotalCompany = async () => {
+  try {
+    const url = `${BASE_URL}company/GetCompanyRequest`;
+    const authToken = getAuthToken();
+
+    const response = await axios.get(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error fetching fetchTotalCompany:", error);
+    throw error;
+  }
+};
+
+export const fetchAnalyticUsers = async (id) => {
+  try {
+    const authToken = getAuthToken();
+    let url =`${BASE_URL}user/GetTopUsers?companyID=${id}`
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+
+    const users = await response.json();
+      const userResponse = users;
+   return  userResponse;
+  } catch (error) {
+    console.error('Error fetching Analytic Users Request:', error); 
+    return { success: false, error: 'Error fetching Analytic Users Request' };
+  }
+};
+
+export const fetchData = async (companyName = '', email = '', country = '') => {
+  try {
+    const url = `${BASE_URL}company/GetCompany?companyname=${companyName}&email=${email}&country=${country}`;
+    const authToken = getAuthToken();
+
+    const response = await axios.get(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};
+
+export const addOrUpdateCompany = async (formData) => {
+  try {
+    authToken = getAuthToken();
+    const response = await axios.post(
+      `${BASE_URL}company/AddOrUpdate`,
+      JSON.stringify(formData),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+      },
+      )
+     if (response.status === 200) {
+      return { success: true, data: response.data.data 
+     }; 
+
+    } else {
+      return {
+        success: false,
+        error: response.data.status || 'Failed to add/update company',
+      };
+    }
+  } catch (error) {
+    console.error('Error adding/updating company:', error.data);
+    return { success: false, error: error.message || 'An error occurred' };
+}
+};
+
+export const fetchDelete = async (id) => {
+  try {
+    const authToken =  getAuthToken();
+
+    const response = await axios.post(
+      `${BASE_URL}company/Delete`,
+      { companyID: id },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
+    );
+    if (response.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return {
+        success: false,
+        error: response.data.message,
+      };
+    }
+  } catch (error) {
+    console.error('Error deleting company:', error);
+    return { success: false, error: 'Error deleting company' };
+  }
+};
+
+export const fetchCompanyView = async (cID) => {
+  try {
+    const authToken = getAuthToken();
+    let url = `${BASE_URL}company/SingleCompany?comapnyID=${cID}`;
+
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      return { success: true, data }; 
+    } else {
+      throw new Error('Failed to fetch CompanyView Page'); 
+    }
+  } catch (error) {
+    console.error('Error fetching CompanyView Page:', error); 
+    return { success: false, error: 'Error fetching CompanyView Page' };
+  }
+};  
+
+export const fetchSignleComUser = async (uscomID) => {
+  try {
+    const authToken = getAuthToken();
+    let url = `${BASE_URL}company/CompanyUserList?comapnyID=${uscomID}`;
+  
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching SignleCompanyUser List:', error);
+    return { error: 'Error fetching SignleCompanyUser List' };
+  }
+};
+
+export const fetchUserList = async (ID='',name='',email='',phone='',) => {
+
+  try {
+    const authToken = getAuthToken();
+
+    let url = ID
+    ?`${BASE_URL}user/GetUser?companyID=${ID}&name=${name}&email=${email}&phoneno=${phone}`
+    :`${BASE_URL}user/GetUser?name=${name}&email=${email}&phoneno=${phone}`
+
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      return { success: true, data };
+    } else {
+      throw new Error('Failed to fetch user list');
+    }
+  } catch (error) {
+    console.error('Error fetching user list:', error);
+    return { success: false, error: 'Error fetching user list' };
+  }
+};
+
+export const fetchDeleteUser = async (id) => {
+  try {
+    const authToken = getAuthToken();
+    const response = await axios.post(
+      `${BASE_URL}user/Delete`,
+      { userID: id }, 
+      {
+        headers: {
+          Authorization: `Bearer ${authToken}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    if (response.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return {
+        success: false,
+        error: response.data.message || 'Error deleting user',
+      };
+    }
+  } catch (error) {
+    console.error('Error deleting user:', error);
+    return { success: false, error: 'Error deleting user'};
+  }
+};
+
+export const sendVerification = async (id) => {
+
+  try {
+    const authToken = getAuthToken();
+
+    const response = await axios.post(
+      `${BASE_URL}user/GenerateOtp`,
+      { userID: id },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authToken}`,
+        },
+      }
+    );
+    if (response.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return {
+        success: false,
+        error: response.data.message,
+      };
+    }
+  } catch (error) {
+    console.error('Error GenerateOtp:', error);
+    return { success: false, error: 'Error GenerateOtp' };
+  }
+};
+
+export const addOrUpdateUser = async (formData) => {
+  try {
+    authToken =  getAuthToken();
+    const response = await axios.post(
+      `${BASE_URL}user/AddOrUpdate`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`
+        },
+      }
+    );
+    if (response.status) {
+      return { success: true, data: response };
+    } else {
+      return {
+        success: false,
+        error: response.data.message || 'Failed to add/update company',
+      };
+    }
+  } catch (error) {
+    console.error('Error adding/updating user:', error);
+    return { success: false, error: error.response.data.message || 'An error occurred' };
+  }
+};
+
+

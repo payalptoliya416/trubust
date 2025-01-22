@@ -22,16 +22,7 @@ function createData(tracking_no, name, fat, carbs, protein) {
 }
 
 const rows = [
-  createData(84564564, 'Camera Lens', 40, 2, 40570),
-  createData(98764564, 'Laptop', 300, 0, 180139),
-  createData(98756325, 'Mobile', 355, 1, 90989),
-  createData(98652366, 'Handset', 50, 1, 10239),
-  createData(13286564, 'Computer Accessories', 100, 1, 83348),
-  createData(86739658, 'TV', 99, 0, 410780),
-  createData(13256498, 'Keyboard', 125, 2, 70999),
-  createData(98753263, 'Mouse', 89, 2, 10570),
-  createData(98753275, 'Desktop', 185, 1, 98063),
-  createData(98753291, 'Chair', 100, 0, 14001)
+  createData(84564564, 'Camera Lens', 40, 2),
 ];
 
 function descendingComparator(a, b, orderBy) {
@@ -44,59 +35,66 @@ function descendingComparator(a, b, orderBy) {
   return 0;
 }
 
+// function getComparator(order, orderBy) {
+//   return order === 'desc' ? (a, b) => descendingComparator(a, b, orderBy) : (a, b) => -descendingComparator(a, b, orderBy);
+// }
 function getComparator(order, orderBy) {
-  return order === 'desc' ? (a, b) => descendingComparator(a, b, orderBy) : (a, b) => -descendingComparator(a, b, orderBy);
+  return order === 'desc'
+    ? (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
+    : (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
 }
 
+// function stableSort(array, comparator) {
+//   const stabilizedThis = array.map((el, index) => [el, index]);
+//   stabilizedThis.sort((a, b) => {
+//     const order = comparator(a[0], b[0]);
+//     if (order !== 0) {
+//       return order;
+//     }
+//     return a[1] - b[1];
+//   });
+//   return stabilizedThis.map((el) => el[0]);
+// }
 function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
+  if (!Array.isArray(array)) return [];
+  const stabilizedArray = array.map((el, index) => [el, index]);
+  stabilizedArray.sort((a, b) => {
     const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
+    if (order !== 0) return order;
     return a[1] - b[1];
   });
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedArray.map((el) => el[0]);
 }
 
+
+//  const companyName = ID === 0 ? "Companies" : "Users"
 const headCells = [
   {
-    id: 'tracking_no',
-    align: 'left',
-    disablePadding: false,
-    label: 'Tracking No.'
+    id: 'name',
+    align: 'center',
+    label: 'companyName'
   },
   {
     id: 'name',
-    align: 'left',
-    disablePadding: true,
-    label: 'Product Name'
+    align: 'center',
+    label: 'External/Internal'
   },
   {
-    id: 'fat',
-    align: 'right',
-    disablePadding: false,
-    label: 'Total Order'
+    id: 'total_users',
+    align: 'center',
+    label: 'Users'
   },
   {
     id: 'carbs',
-    align: 'left',
-    disablePadding: false,
-
-    label: 'Status'
+    align: 'center',
+    label: 'Frauds'
   },
-  {
-    id: 'protein',
-    align: 'right',
-    disablePadding: false,
-    label: 'Total Amount'
-  }
+ 
 ];
 
 // ==============================|| ORDER TABLE - HEADER ||============================== //
 
-function OrderTableHead({ order, orderBy }) {
+function OrderTableHead({ order, orderBy ,ID }) {
   return (
     <TableHead>
       <TableRow>
@@ -147,7 +145,8 @@ function OrderStatus({ status }) {
 
 // ==============================|| ORDER TABLE ||============================== //
 
-export default function OrderTable() {
+export default function OrderTable(props) {
+  const {ID , data} = props;
   const order = 'asc';
   const orderBy = 'tracking_no';
 
@@ -164,34 +163,34 @@ export default function OrderTable() {
         }}
       >
         <Table aria-labelledby="tableTitle">
-          <OrderTableHead order={order} orderBy={orderBy} />
+          <OrderTableHead order={order} orderBy={orderBy} ID={ID} />
           <TableBody>
-            {stableSort(rows, getComparator(order, orderBy)).map((row, index) => {
-              const labelId = `enhanced-table-checkbox-${index}`;
+  {stableSort(Array.isArray(data) ? data : [], getComparator(order, orderBy)).map((row, index) => {
+    const labelId = `enhanced-table-checkbox-${index}`;
 
-              return (
-                <TableRow
-                  hover
-                  role="checkbox"
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  tabIndex={-1}
-                  key={row.tracking_no}
-                >
-                  <TableCell component="th" id={labelId} scope="row">
-                    <Link color="secondary"> {row.tracking_no}</Link>
-                  </TableCell>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell align="right">{row.fat}</TableCell>
-                  <TableCell>
-                    <OrderStatus status={row.carbs} />
-                  </TableCell>
-                  <TableCell align="right">
-                    <NumericFormat value={row.protein} displayType="text" thousandSeparator prefix="$" />
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
+    return (
+      <TableRow
+        hover
+        role="checkbox"
+        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+        tabIndex={-1}
+        key={row.tracking_no}
+      >
+        <TableCell component="th" id={labelId} scope="row" align="center">
+          <Link color="secondary">{row.name}</Link>
+        </TableCell>
+        <TableCell align="center">
+          {row?.total_internal_requests + row?.total_external_requests}
+        </TableCell>
+        <TableCell align="center">{row.total_users}</TableCell>
+        <TableCell align="center">
+          {row?.total_frauds_requests + row?.total_frauds_external_requests}
+        </TableCell>
+      </TableRow>
+    );
+  })}
+</TableBody>
+
         </Table>
       </TableContainer>
     </Box>

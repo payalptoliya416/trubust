@@ -13,14 +13,15 @@ import IncomeAreaChart from './IncomeAreaChart';
 
 // ==============================|| DEFAULT - UNIQUE VISITOR ||============================== //
 
-export default function UniqueVisitorCard() {
+export default function UniqueVisitorCard(props) {
+  const {chartData  , ID} = props;
   const [slot, setSlot] = useState('week');
-
+  
   return (
     <>
       <Grid container alignItems="center" justifyContent="space-between">
         <Grid item>
-          <Typography variant="h5">Unique Visitor</Typography>
+          <Typography variant="h5">{ID === 0 ? "Total company" : "Total Users" }</Typography>
         </Grid>
         <Grid item>
           <Stack direction="row" alignItems="center" spacing={0}>
@@ -28,16 +29,14 @@ export default function UniqueVisitorCard() {
               size="small"
               onClick={() => setSlot('month')}
               color={slot === 'month' ? 'primary' : 'secondary'}
-              variant={slot === 'month' ? 'outlined' : 'text'}
-            >
+              variant={slot === 'month' ? 'outlined' : 'text'} >
               Month
             </Button>
             <Button
               size="small"
               onClick={() => setSlot('week')}
               color={slot === 'week' ? 'primary' : 'secondary'}
-              variant={slot === 'week' ? 'outlined' : 'text'}
-            >
+              variant={slot === 'week' ? 'outlined' : 'text'} >
               Week
             </Button>
           </Stack>
@@ -45,7 +44,7 @@ export default function UniqueVisitorCard() {
       </Grid>
       <MainCard content={false} sx={{ mt: 1.5 }}>
         <Box sx={{ pt: 1, pr: 2 }}>
-          <IncomeAreaChart slot={slot} />
+          <IncomeAreaChart slot={slot} chartData={chartData}/>
         </Box>
       </MainCard>
     </>

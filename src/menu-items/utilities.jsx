@@ -41,11 +41,26 @@ const utilities = {
     },
     {
       id: 'util-shadow',
-      title: 'Shadow',
+      title: 'shadow',
       type: 'item',
       url: '/shadow',
       icon: icons.BarcodeOutlined
-    }
+    },
+    {
+      id: 'company',
+      title: 'Company',
+      type: 'item',
+      url: '/company',
+      icon: icons.BarcodeOutlined
+    },
+    {
+      id: 'user',
+      title: 'User',
+      type: 'item',
+      url: '/user',
+      icon: icons.BarcodeOutlined
+    },
+
   ]
 };
 
