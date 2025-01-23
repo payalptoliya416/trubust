@@ -59,7 +59,6 @@ export default function AuthLogin({ isDemo = false }) {
           navigate('/');
         } else if (permissions.length > 0) {
           navigate('/');
-          // navigate(`/${permissions[0].name}`);
         } else {
           navigate('/home');
         }

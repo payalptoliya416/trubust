@@ -324,4 +324,96 @@ export const addOrUpdateUser = async (formData) => {
   }
 };
 
+export const fetchTicketList = async () => {
+  try {
+    const authToken = getAuthToken();
+    const url = `${BASE_URL}supportTicket/GetsupportTicket`;
+    
+    const response = await fetch(url, {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      },
+      body: JSON.stringify({}) 
+    });
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error('Error fetching ticket list:', error);
+    return { error: 'Error fetching ticket list' };
+  }
+};
+
+export const fetchTicketReplay = async (ticketID) => {
+  try {
+    const authToken = getAuthToken();
+    let url = `${BASE_URL}supportTicket/GetReplay?userID=${ticketID}`;
+  
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error('Error fetching ticket list:', error);
+    return { error: 'Error fetching ticket list' };
+  }
+};
+
+export const postComment = async (currentTicketID, commentText,currentCompanyID,image) => {
+  
+  try {
+    const authToken = getAuthToken();
+    const url = `${BASE_URL}supportTicket/admin/send`;
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      },
+      body: JSON.stringify({
+        receiverID: currentTicketID,
+        companyID:currentCompanyID,
+        message: commentText,
+        image:image
+      })
+    });
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error posting comment:', error);
+    return { error: 'Error posting comment' };
+  }
+};
+
+export const fetchRequstList = async (id) => {
+  try {
+    const authToken = getAuthToken();
+    let url = id
+    ? `${BASE_URL}externalrequest/GetAllRequest?companyID=${id}`
+    : `${BASE_URL}externalrequest/GetAllRequest`;
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+
+    const data = await response.json(); 
+    if (response.ok) {
+      return { success: true, data };
+    } else {
+      throw new Error('Failed to fetch Requst list');
+    }
+  } catch (error) {
+    console.error('Error fetching Requst list:', error);
+    return { success: false, error: 'Error fetching Requst list' };
+  }
+};
 

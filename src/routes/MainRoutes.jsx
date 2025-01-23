@@ -12,6 +12,10 @@ const SingleCompanyView = Loadable(lazy(() => import('pages/company/SingleCompan
 const EditCompany = Loadable(lazy(() => import('pages/company/EditCompany')));
 const UserComponent = Loadable(lazy(() => import('pages/user/UserComponent')));
 const AddUser = Loadable(lazy(() => import('pages/user/AddUser')));
+const SupportTicketChat = Loadable(lazy(() => import('pages/support-ticket/SupportTicketChat')));
+const SupportTicket = Loadable(lazy(() => import('pages/support-ticket/SupportTicket')));
+const ExternalRequest = Loadable(lazy(() => import('pages/external-request/ExternalRequest')));
+const ExternalRequestChat = Loadable(lazy(() => import('pages/external-request/ExternalRequestChat')));
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
 
 // render - sample page
@@ -67,6 +71,22 @@ const MainRoutes = {
     {
       path: 'useraddorupdate',
       element: <AddUser />
+    },
+    {
+      path: 'support-ticket',
+      element: <SupportTicket />
+    },
+    {
+      path: 'support-ticket-chat',
+      element: <SupportTicketChat />
+    },
+    {
+      path: 'external-request',
+      element: <ExternalRequest />
+    },
+    {
+      path: 'external-request-chat',
+      element: <ExternalRequestChat />
     },
     {
       path: 'typography',

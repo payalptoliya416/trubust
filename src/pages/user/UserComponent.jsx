@@ -187,7 +187,7 @@ export default function UserComponent() {
 </div>
 
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-        <TableContainer sx={{ maxHeight: 440 }}>
+        <TableContainer sx={{ maxHeight: 580 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
@@ -195,7 +195,13 @@ export default function UserComponent() {
                   <TableCell
                     key={column.id}
                     align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                    style={{
+                minWidth: column.minWidth,
+                position: 'sticky',
+                top: 0,  
+                backgroundColor: '#fff', // Add background color to avoid transparency issues
+                zIndex: 1, // Ensure the header is above the body rows
+              }}
                   >
                     {column.label}
                   </TableCell>

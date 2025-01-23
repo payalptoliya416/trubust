@@ -51,7 +51,6 @@ export default function Breadcrumbs({ navigation, title, ...others }) {
   let breadcrumbContent = <Typography />;
   let itemTitle = '';
 
-  // collapse item
   if (main && main.type === 'collapse') {
     mainContent = (
       <Typography component={Link} to={document.location.pathname} variant="h6" sx={{ textDecoration: 'none' }} color="textSecondary">

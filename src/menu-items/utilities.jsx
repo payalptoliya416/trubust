@@ -60,6 +60,20 @@ const utilities = {
       url: '/user',
       icon: icons.BarcodeOutlined
     },
+    {
+      id: 'support-ticket',
+      title: 'Support Ticket',
+      type: 'item',
+      url: '/support-ticket',
+      icon: icons.BarcodeOutlined
+    },
+    {
+      id: 'external-request',
+      title: 'External Request',
+      type: 'item',
+      url: '/external-request',
+      icon: icons.BarcodeOutlined
+    },
 
   ]
 };

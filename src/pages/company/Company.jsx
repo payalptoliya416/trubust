@@ -165,7 +165,7 @@ export default function Company() {
   </Grid>
 </div>
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+      <TableContainer sx={{ maxHeight: 580 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
@@ -182,7 +182,9 @@ export default function Company() {
           </TableHead>
          
 <TableBody>
-  {rowData.map((row) => (
+  {rowData
+  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+  .map((row) => (
     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
       {columns.map((column) => {
         if (column.id === "action") {
