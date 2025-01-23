@@ -115,7 +115,6 @@ export default function SupportTicketChat() {
 
     const handleSendMessage = (e) => {
         e.preventDefault();
-        console.log("newMessage", newMessage);
         if (newMessage.trim() !== "" || selectedImage) {
           const currentTicketID = ticketID ? ticketID : senderId;
           const currentCompanyID = companyId;
@@ -225,6 +224,7 @@ export default function SupportTicketChat() {
             </Typography>
           )}
         </Stack>
+        <MessageBubble isOwn={msg.type}>
         {msg.image && (
           <img
             src={msg.image}
@@ -232,7 +232,6 @@ export default function SupportTicketChat() {
             style={{ width: "70px", marginBlock: "14px" }}
           />
         )}
-        <MessageBubble isOwn={msg.type}>
           <Typography variant="body1">{msg.message}</Typography>
           <Typography
             variant="caption"

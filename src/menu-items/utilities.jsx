@@ -7,7 +7,12 @@ import {
   FontSizeOutlined,
   LoadingOutlined
 } from '@ant-design/icons';
-
+import { HiOutlineOfficeBuilding } from "react-icons/hi";
+import { FaUser } from "react-icons/fa6";
+import { FaTicket } from "react-icons/fa6";
+import { IoGitPullRequestSharp } from "react-icons/io5";
+import { CgInternal } from "react-icons/cg";
+import { PiWechatLogoFill } from "react-icons/pi";
 // icons
 const icons = {
   FontSizeOutlined,
@@ -15,7 +20,13 @@ const icons = {
   BarcodeOutlined,
   AntDesignOutlined,
   LoadingOutlined,
-  AppstoreAddOutlined
+  AppstoreAddOutlined,
+  HiOutlineOfficeBuilding ,
+  FaUser  ,
+  FaTicket ,
+  IoGitPullRequestSharp ,
+  CgInternal ,
+  PiWechatLogoFill
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -51,28 +62,42 @@ const utilities = {
       title: 'Company',
       type: 'item',
       url: '/company',
-      icon: icons.BarcodeOutlined
+      icon: icons.HiOutlineOfficeBuilding
     },
     {
       id: 'user',
       title: 'User',
       type: 'item',
       url: '/user',
-      icon: icons.BarcodeOutlined
+      icon: icons.FaUser 
     },
     {
       id: 'support-ticket',
       title: 'Support Ticket',
       type: 'item',
       url: '/support-ticket',
-      icon: icons.BarcodeOutlined
+      icon: icons.FaTicket
     },
     {
       id: 'external-request',
       title: 'External Request',
       type: 'item',
       url: '/external-request',
-      icon: icons.BarcodeOutlined
+      icon: icons.IoGitPullRequestSharp 
+    },
+    {
+      id: 'internal-request',
+      title: 'Internal Request',
+      type: 'item',
+      url: '/internal-request',
+      icon: icons.CgInternal
+    },
+    {
+      id: 'secure-channel',
+      title: 'Secure Channel',
+      type: 'item',
+      url: '/secure-channel',
+      icon: icons.PiWechatLogoFill
     },
 
   ]

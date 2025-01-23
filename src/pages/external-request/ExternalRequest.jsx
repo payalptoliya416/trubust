@@ -9,8 +9,8 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router';
-import { fetchRequstList } from 'api/Data';
-import { WechatOutlined } from '@ant-design/icons';
+import { fetchApproveORDecline, fetchRequstList } from 'api/Data';
+import { BsFillChatDotsFill } from "react-icons/bs";
 
 const columns = [
     {
@@ -21,7 +21,7 @@ const columns = [
     {
       id: "company_name",
       label: "Company Name",
-      minWidth: 100,
+      minWidth: 170,
     },
     {
       id: "username",
@@ -59,7 +59,7 @@ const columns = [
     {
       id: "status",
       label: "Status",
-      minWidth: 170,
+      minWidth: 120,
       cellRenderer: (params) => {
         const { status } = params.data;
         if (status === 0) {
@@ -120,13 +120,11 @@ const columns = [
     {
       id: "action",
       label: "Actions",
-      minWidth: 170,
+      minWidth: 220,
       cellRenderer: (params) => {
         const { id, status, ID } = params.data;
         if (status === 0 && ID === 0) {
           return (
-            <>
-              {isClicked ? null : (
                 <>
                   <button
                     style={{
@@ -159,8 +157,6 @@ const columns = [
                     Decline
                   </button>
                 </>
-              )}
-            </>
           );
         } else if (status === 1 || status === 2) {
           return null;
@@ -173,23 +169,9 @@ const columns = [
       id: "replay",
       label: "Replay",
       minWidth: 170,
-      cellRenderer: (params) => (
-        <button
-          onClick={() => handleOpen(params.data)}
-          style={{
-            marginTop: "8px",
-            fontSize: "24px",
-            color: "#1C1C1C",
-            cursor: "pointer",
-          }}
-        >
-          <PiWechatLogoBold className="text-2xl" />
-        </button>
-      ),
     },
-  ];
+];
   
-
 export default function ExternalRequest() {
 
         const [page, setPage] = React.useState(0);
@@ -222,20 +204,47 @@ export default function ExternalRequest() {
             });
           }, []);
 
-     React.useEffect(() => {
+      React.useEffect(() => {
             fetchList();
           }, []);
+
           const loginCompanyID =  JSON.parse(localStorage.getItem('logindetail')) || [];
-  const ID = loginCompanyID.companyID
+         const ID = loginCompanyID.companyID
+
           const fetchList = async () => {
             try {
               const response = await fetchRequstList(ID === 0 ? null : ID);
               const requestData = response.data.data;
+              console.log("requestData",requestData)
               setRowData(requestData);
             } catch (error) {
               console.error("Error fetching default ticket list:", error);
             }
           };
+
+          const handleChat = (row)=>{
+            navigate('/external-request-chat' ,{ state: { row } })
+          }
+
+          const handleApprove = async (id, status) => {
+                      const response = await fetchApproveORDecline(id, status);
+                      if (response.success === true) {
+                          const message = response.data.message;
+                        toast.success(message);
+                      } else {
+                        toast.error("Failed to approve request");
+                      }
+                    };
+                  
+                    const handleDecline = async (id, status) => {
+                      const response = await fetchApproveORDecline(id, status);
+                      if (response.success === true) {
+                        const message = response.data.message;
+                        toast.success(message);
+                      } else {
+                        toast.error("Failed to Decline request");
+                      }
+                    };
   return (
     <>
      {permissions.menu === 1 &&(
@@ -272,8 +281,8 @@ export default function ExternalRequest() {
             return (
               <TableCell key={column.id} align="left">
                 <div style={{ display: "flex", gap: "14px" }}>
-                  <WechatOutlined
-                    style={{ color: "#1C1C1C", cursor: "pointer", fontSize: '20px' }}
+                  <BsFillChatDotsFill 
+                    style={{ color: "#808080", cursor: "pointer", fontSize: '20px' }}
                     onClick={() => handleChat(row)}
                   />
                 </div>
@@ -289,7 +298,6 @@ export default function ExternalRequest() {
             );
           }
 
-          // Handle other custom renderers (for example status and replay columns)
           if (column.id === "status") {
             return (
               <TableCell key={column.id} align="left">
@@ -299,7 +307,7 @@ export default function ExternalRequest() {
           }
 
           if (column.id === "created_at") {
-            const date = new Date(row[column.id]); // Use the row's created_at value
+            const date = new Date(row[column.id]); 
             const formattedDate = date.toLocaleDateString('en-US', {
               month: '2-digit',
               day: '2-digit',
@@ -314,6 +322,47 @@ export default function ExternalRequest() {
               </TableCell>
             );
           }
+
+          if (column.id === "action") {
+            return (
+                <TableCell key={column.id} align="left">
+                {row.status === 0 && ID === 0 ? (
+                    <>
+                    <button
+                        style={{
+                        fontSize: "12px",
+                        backgroundColor: "#28c76f",
+                        padding: "6px 12px",
+                        borderRadius: "8px",
+                        color: "white",
+                        fontWeight: "500",
+                        marginRight: "8px",
+                        border: "transparent",
+                        }}
+                        onClick={() => handleApprove(row.id, 1)}
+                    >
+                        Approve
+                    </button>
+                    <button
+                        style={{
+                        fontSize: "12px",
+                        backgroundColor: "#ea5455",
+                        padding: "6px 12px",
+                        borderRadius: "8px",
+                        color: "white",
+                        fontWeight: "500",
+                        marginRight: "12px",
+                        border: "transparent",
+                        }}
+                        onClick={() => handleDecline(row.id, 2)}
+                    >
+                        Decline
+                    </button>
+                    </>
+                ) : row.status === 1 || row.status === 2 ? null : null}
+                </TableCell>
+            );
+            }
 
           // Handle default behavior for other columns
           return (

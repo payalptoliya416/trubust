@@ -10,7 +10,7 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router';
 import { fetchTicketList } from 'api/Data';
-import { WechatOutlined } from '@ant-design/icons';
+import { BsFillChatDotsFill } from "react-icons/bs";
 
 const columns = [
     { 
@@ -86,10 +86,10 @@ export default function SupportTicket() {
           return (
             <TableCell key={column.id} align="left">
               <div style={{ display: "flex", gap: "14px" }}>
-                <WechatOutlined
-                  style={{ color: "#1C1C1C", cursor: "pointer" , fontSize: '20px'}}
-                  onClick={() => handleChat(row)}
-                />
+               <BsFillChatDotsFill 
+              style={{ color: "#808080", cursor: "pointer", fontSize: '20px' }}
+                onClick={() => handleChat(row)}
+                 />
               </div>
             </TableCell>
           );
@@ -102,6 +102,23 @@ export default function SupportTicket() {
             </TableCell>
           );
         }
+
+          if (column.id === "created_at") {
+                    const date = new Date(row[column.id]); // Use the row's created_at value
+                    const formattedDate = date.toLocaleDateString('en-US', {
+                      month: '2-digit',
+                      day: '2-digit',
+                      year: 'numeric',
+                    });
+        
+                    return (
+                      <TableCell key={column.id} align="left">
+                        <div>
+                          {formattedDate}
+                        </div>
+                      </TableCell>
+                    );
+                  }
         // Default behavior for other columns
         return (
           <TableCell key={column.id} align="left">

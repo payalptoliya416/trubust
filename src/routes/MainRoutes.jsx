@@ -16,6 +16,8 @@ const SupportTicketChat = Loadable(lazy(() => import('pages/support-ticket/Suppo
 const SupportTicket = Loadable(lazy(() => import('pages/support-ticket/SupportTicket')));
 const ExternalRequest = Loadable(lazy(() => import('pages/external-request/ExternalRequest')));
 const ExternalRequestChat = Loadable(lazy(() => import('pages/external-request/ExternalRequestChat')));
+const InternalRequest = Loadable(lazy(() => import('pages/internal-request/InternalRequest')));
+const SecureChannel = Loadable(lazy(() => import('pages/secure-channel/SecureChannel')));
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
 
 // render - sample page
@@ -87,6 +89,14 @@ const MainRoutes = {
     {
       path: 'external-request-chat',
       element: <ExternalRequestChat />
+    },
+    {
+      path: 'internal-request',
+      element: <InternalRequest />
+    },
+    {
+      path: 'secure-channel',
+      element: <SecureChannel />
     },
     {
       path: 'typography',

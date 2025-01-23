@@ -417,3 +417,167 @@ export const fetchRequstList = async (id) => {
   }
 };
 
+export const fetchRequestReplay = async (companyID, userID,requestID) => {
+  
+  try {
+    const authToken = getAuthToken();
+    const url = ` ${BASE_URL}admin/externalrequest/GetReplay?userID=${userID}&companyID=${companyID}&requestID=${requestID}`;
+
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.data; 
+  } catch (error) {
+    console.error('Error fetching fetchRequestReplay list:', error);
+    return { error: 'Error fetching fetchRequestReplay list' };
+  }
+};
+
+export const  postExternalChat = async (currentUserID, commentText, currentCompanyID, image,currentID ) => {
+  try {
+    const authToken = getAuthToken();
+    const url = `${BASE_URL}admin/externalrequest/replay`;
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      },
+      body: JSON.stringify({
+        externalrequestID:currentID,
+        userID: currentUserID,
+        companyID:currentCompanyID,
+        message: commentText,
+        image:image
+       
+      })
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return { error: 'Error postExternalChat comment' };
+  }
+};
+
+export const fetchApproveORDecline = async (id, status) => {
+  try {
+    const authToken = getAuthToken();
+    let url = `${BASE_URL}externalrequest/ApproveORDecline`;
+  
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      },
+      body: JSON.stringify({
+        requestID: id,
+        status: status
+      })
+    });
+
+    const data = await response.json();
+    if (response.ok) {
+      return { success: true, data };
+    } else {
+      throw new Error('Failed to fetch');
+    }
+  } catch (error) {
+    console.error('Error', error);
+    return { success: false, error: 'Error' };
+  }
+};
+
+export const fetchInternalRequest = async (id) => {
+  try {
+    const authToken = getAuthToken();
+    let url = id
+    ? `${BASE_URL}internalrequest/GetInternalRequest?companyID=${id}`
+    : `${BASE_URL}internalrequest/GetInternalRequest`;
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+
+    const data = await response.json();
+      const res = data.data;
+   return  res;
+  } catch (error) {
+    console.error('Error fetching CompanyView Page:', error); 
+    return { success: false, error: 'Error fetching InternalRequest' };
+  }
+};
+
+export const fetchGroupChat = async (id) => {
+  try {
+    const authToken = getAuthToken();
+    let url = id
+    ? `${BASE_URL}groupchat/GroupChatList?companyID=${id}`
+    : `${BASE_URL}groupchat/GroupChatList`;
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+
+    const data = await response.json();
+      const res = data;
+   return  res;
+  } catch (error) {
+    console.error('Error fetching GroupChat:', error); 
+    return { success: false, error: 'Error fetching GroupChat' };
+  }
+};
+
+export const fetchChatList = async (uscomID) => {
+  try {
+    const authToken = getAuthToken();
+    let url = `${BASE_URL}groupchat/getGroupChat?companyID=${uscomID}`;
+  
+    const response = await fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`
+      }
+    });
+
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error('Error fetching ticket list:', error);
+    return { error: 'Error fetching ticket list' };
+  }
+};
+
+export const postGroupchat = async (companyID, commentText,image) => {
+  try {
+    const authToken = getAuthToken();
+    const url = `${BASE_URL}groupchat/admin/send`;
+    
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${authToken}`
+      },
+      body: JSON.stringify({
+        companyID:companyID,
+        message:commentText,
+        image:image
+      })
+    });
+  
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error postGroupchat comment:', error);
+    return { error: 'Error postGroupchat comment' };
+  }
+};
