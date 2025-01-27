@@ -215,7 +215,6 @@ export default function ExternalRequest() {
             try {
               const response = await fetchRequstList(ID === 0 ? null : ID);
               const requestData = response.data.data;
-              console.log("requestData",requestData)
               setRowData(requestData);
             } catch (error) {
               console.error("Error fetching default ticket list:", error);
@@ -223,7 +222,7 @@ export default function ExternalRequest() {
           };
 
           const handleChat = (row)=>{
-            navigate('/external-request-chat' ,{ state: { row } })
+            navigate('/external-request/external-request-chat' ,{ state: { row } })
           }
 
           const handleApprove = async (id, status) => {

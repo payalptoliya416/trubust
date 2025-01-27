@@ -33,6 +33,26 @@ export default function SupportTicket() {
         setPage(0);
       };
 
+      const [permissions, setPermissions] = React.useState({
+        menu: 0,
+        create: 0,
+        edit: 0,
+        delete: 0
+      });
+    
+    
+      React.useEffect(() => {
+        const storedPermissions = JSON.parse(localStorage.getItem('permissions')) || [];
+        const userPermissions = storedPermissions.find(item => item.name === 'ticket') || {};
+      
+        setPermissions({
+          menu: userPermissions.menu || 0,
+          create: userPermissions.create || 0,
+          edit: userPermissions.edit || 0,
+          delete: userPermissions.delete || 0
+        });
+      }, []);
+
       React.useEffect(() => {
         fetchList();
       }, []);
@@ -48,11 +68,12 @@ export default function SupportTicket() {
       };
 
       const handleChat = (row)=>{
-        navigate('/support-ticket-chat' ,{ state: { row } })
+        navigate('/support-ticket/support-ticket-chat' ,{ state: { row } })
       }
       
   return (
     <>
+    { permissions.menu === 1 &&(
        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 580 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -140,7 +161,7 @@ export default function SupportTicket() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </Paper>
+    </Paper>)}
     </>
   )
 }

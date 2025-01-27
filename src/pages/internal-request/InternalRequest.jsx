@@ -128,6 +128,7 @@ export default function InternalRequest() {
 
   return (
     <>
+     {permissions.menu === 1 &&(
          <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 580 }}>
         <Table stickyHeader aria-label="sticky table">
@@ -200,7 +201,7 @@ export default function InternalRequest() {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
-    </Paper>
+    </Paper>)}
     </>
   )
 }

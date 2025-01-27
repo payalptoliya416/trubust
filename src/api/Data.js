@@ -16,12 +16,13 @@ export const removeAuthTokenFromLocalStorage = () => {
   localStorage.removeItem('authToken');
 };
 
-export const  fetchLogin = async (data) => {
+export const fetchLogin = async (data) => {
   try {
     const response = await axios.post(
-     `${BASE_URL}admin/login`,
+      `${BASE_URL}admin/login`,
       data,
-      { headers: {
+      {
+        headers: {
           'Content-Type': 'application/json',
         },
       }
@@ -44,8 +45,8 @@ export const fetchAnalyticRequest = async (id) => {
   try {
     const authToken = getAuthToken();
     let url = id
-    ? `${BASE_URL}dashboard/Counter?companyID=${id}`
-    : `${BASE_URL}dashboard/Counter`;
+      ? `${BASE_URL}dashboard/Counter?companyID=${id}`
+      : `${BASE_URL}dashboard/Counter`;
     const response = await fetch(url, {
       headers: {
         'Authorization': `Bearer ${authToken}`
@@ -53,11 +54,11 @@ export const fetchAnalyticRequest = async (id) => {
     });
 
     const data = await response.json();
-  
-      const res = data;
-   return  res;
+
+    const res = data;
+    return res;
   } catch (error) {
-    console.error('Error fetching Analytic Request:', error); 
+    console.error('Error fetching Analytic Request:', error);
     return { success: false, error: 'Error fetching Analytic Request' };
   }
 };
@@ -82,7 +83,7 @@ export const fetchTotalCompany = async () => {
 export const fetchAnalyticUsers = async (id) => {
   try {
     const authToken = getAuthToken();
-    let url =`${BASE_URL}user/GetTopUsers?companyID=${id}`
+    let url = `${BASE_URL}user/GetTopUsers?companyID=${id}`
     const response = await fetch(url, {
       headers: {
         'Authorization': `Bearer ${authToken}`
@@ -90,10 +91,10 @@ export const fetchAnalyticUsers = async (id) => {
     });
 
     const users = await response.json();
-      const userResponse = users;
-   return  userResponse;
+    const userResponse = users;
+    return userResponse;
   } catch (error) {
-    console.error('Error fetching Analytic Users Request:', error); 
+    console.error('Error fetching Analytic Users Request:', error);
     return { success: false, error: 'Error fetching Analytic Users Request' };
   }
 };
@@ -127,10 +128,11 @@ export const addOrUpdateCompany = async (formData) => {
           'Authorization': `Bearer ${authToken}`
         },
       },
-      )
-     if (response.status === 200) {
-      return { success: true, data: response.data.data 
-     }; 
+    )
+    if (response.status === 200) {
+      return {
+        success: true, data: response.data.data
+      };
 
     } else {
       return {
@@ -141,12 +143,12 @@ export const addOrUpdateCompany = async (formData) => {
   } catch (error) {
     console.error('Error adding/updating company:', error.data);
     return { success: false, error: error.message || 'An error occurred' };
-}
+  }
 };
 
 export const fetchDelete = async (id) => {
   try {
-    const authToken =  getAuthToken();
+    const authToken = getAuthToken();
 
     const response = await axios.post(
       `${BASE_URL}company/Delete`,
@@ -185,21 +187,21 @@ export const fetchCompanyView = async (cID) => {
 
     const data = await response.json();
     if (response.ok) {
-      return { success: true, data }; 
+      return { success: true, data };
     } else {
-      throw new Error('Failed to fetch CompanyView Page'); 
+      throw new Error('Failed to fetch CompanyView Page');
     }
   } catch (error) {
-    console.error('Error fetching CompanyView Page:', error); 
+    console.error('Error fetching CompanyView Page:', error);
     return { success: false, error: 'Error fetching CompanyView Page' };
   }
-};  
+};
 
 export const fetchSignleComUser = async (uscomID) => {
   try {
     const authToken = getAuthToken();
     let url = `${BASE_URL}company/CompanyUserList?comapnyID=${uscomID}`;
-  
+
     const response = await fetch(url, {
       headers: {
         'Authorization': `Bearer ${authToken}`
@@ -214,14 +216,14 @@ export const fetchSignleComUser = async (uscomID) => {
   }
 };
 
-export const fetchUserList = async (ID='',name='',email='',phone='',) => {
+export const fetchUserList = async (ID = '', name = '', email = '', phone = '',) => {
 
   try {
     const authToken = getAuthToken();
 
     let url = ID
-    ?`${BASE_URL}user/GetUser?companyID=${ID}&name=${name}&email=${email}&phoneno=${phone}`
-    :`${BASE_URL}user/GetUser?name=${name}&email=${email}&phoneno=${phone}`
+      ? `${BASE_URL}user/GetUser?companyID=${ID}&name=${name}&email=${email}&phoneno=${phone}`
+      : `${BASE_URL}user/GetUser?name=${name}&email=${email}&phoneno=${phone}`
 
     const response = await fetch(url, {
       headers: {
@@ -246,7 +248,7 @@ export const fetchDeleteUser = async (id) => {
     const authToken = getAuthToken();
     const response = await axios.post(
       `${BASE_URL}user/Delete`,
-      { userID: id }, 
+      { userID: id },
       {
         headers: {
           Authorization: `Bearer ${authToken}`,
@@ -264,7 +266,7 @@ export const fetchDeleteUser = async (id) => {
     }
   } catch (error) {
     console.error('Error deleting user:', error);
-    return { success: false, error: 'Error deleting user'};
+    return { success: false, error: 'Error deleting user' };
   }
 };
 
@@ -299,7 +301,7 @@ export const sendVerification = async (id) => {
 
 export const addOrUpdateUser = async (formData) => {
   try {
-    authToken =  getAuthToken();
+    authToken = getAuthToken();
     const response = await axios.post(
       `${BASE_URL}user/AddOrUpdate`,
       formData,
@@ -328,14 +330,14 @@ export const fetchTicketList = async () => {
   try {
     const authToken = getAuthToken();
     const url = `${BASE_URL}supportTicket/GetsupportTicket`;
-    
+
     const response = await fetch(url, {
-      method: 'POST', 
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${authToken}`
       },
-      body: JSON.stringify({}) 
+      body: JSON.stringify({})
     });
 
     const data = await response.json();
@@ -350,7 +352,7 @@ export const fetchTicketReplay = async (ticketID) => {
   try {
     const authToken = getAuthToken();
     let url = `${BASE_URL}supportTicket/GetReplay?userID=${ticketID}`;
-  
+
     const response = await fetch(url, {
       headers: {
         'Authorization': `Bearer ${authToken}`
@@ -365,12 +367,12 @@ export const fetchTicketReplay = async (ticketID) => {
   }
 };
 
-export const postComment = async (currentTicketID, commentText,currentCompanyID,image) => {
-  
+export const postComment = async (currentTicketID, commentText, currentCompanyID, image) => {
+
   try {
     const authToken = getAuthToken();
     const url = `${BASE_URL}supportTicket/admin/send`;
-    
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -379,9 +381,9 @@ export const postComment = async (currentTicketID, commentText,currentCompanyID,
       },
       body: JSON.stringify({
         receiverID: currentTicketID,
-        companyID:currentCompanyID,
+        companyID: currentCompanyID,
         message: commentText,
-        image:image
+        image: image
       })
     });
 
@@ -397,15 +399,15 @@ export const fetchRequstList = async (id) => {
   try {
     const authToken = getAuthToken();
     let url = id
-    ? `${BASE_URL}externalrequest/GetAllRequest?companyID=${id}`
-    : `${BASE_URL}externalrequest/GetAllRequest`;
+      ? `${BASE_URL}externalrequest/GetAllRequest?companyID=${id}`
+      : `${BASE_URL}externalrequest/GetAllRequest`;
     const response = await fetch(url, {
       headers: {
         'Authorization': `Bearer ${authToken}`
       }
     });
 
-    const data = await response.json(); 
+    const data = await response.json();
     if (response.ok) {
       return { success: true, data };
     } else {
@@ -417,8 +419,8 @@ export const fetchRequstList = async (id) => {
   }
 };
 
-export const fetchRequestReplay = async (companyID, userID,requestID) => {
-  
+export const fetchRequestReplay = async (companyID, userID, requestID) => {
+
   try {
     const authToken = getAuthToken();
     const url = ` ${BASE_URL}admin/externalrequest/GetReplay?userID=${userID}&companyID=${companyID}&requestID=${requestID}`;
@@ -432,18 +434,18 @@ export const fetchRequestReplay = async (companyID, userID,requestID) => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    return data.data; 
+    return data.data;
   } catch (error) {
     console.error('Error fetching fetchRequestReplay list:', error);
     return { error: 'Error fetching fetchRequestReplay list' };
   }
 };
 
-export const  postExternalChat = async (currentUserID, commentText, currentCompanyID, image,currentID ) => {
+export const postExternalChat = async (currentUserID, commentText, currentCompanyID, image, currentID) => {
   try {
     const authToken = getAuthToken();
     const url = `${BASE_URL}admin/externalrequest/replay`;
-    
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -451,12 +453,12 @@ export const  postExternalChat = async (currentUserID, commentText, currentCompa
         'Authorization': `Bearer ${authToken}`
       },
       body: JSON.stringify({
-        externalrequestID:currentID,
+        externalrequestID: currentID,
         userID: currentUserID,
-        companyID:currentCompanyID,
+        companyID: currentCompanyID,
         message: commentText,
-        image:image
-       
+        image: image
+
       })
     });
     const data = await response.json();
@@ -470,7 +472,7 @@ export const fetchApproveORDecline = async (id, status) => {
   try {
     const authToken = getAuthToken();
     let url = `${BASE_URL}externalrequest/ApproveORDecline`;
-  
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -499,8 +501,8 @@ export const fetchInternalRequest = async (id) => {
   try {
     const authToken = getAuthToken();
     let url = id
-    ? `${BASE_URL}internalrequest/GetInternalRequest?companyID=${id}`
-    : `${BASE_URL}internalrequest/GetInternalRequest`;
+      ? `${BASE_URL}internalrequest/GetInternalRequest?companyID=${id}`
+      : `${BASE_URL}internalrequest/GetInternalRequest`;
     const response = await fetch(url, {
       headers: {
         'Authorization': `Bearer ${authToken}`
@@ -508,10 +510,10 @@ export const fetchInternalRequest = async (id) => {
     });
 
     const data = await response.json();
-      const res = data.data;
-   return  res;
+    const res = data.data;
+    return res;
   } catch (error) {
-    console.error('Error fetching CompanyView Page:', error); 
+    console.error('Error fetching CompanyView Page:', error);
     return { success: false, error: 'Error fetching InternalRequest' };
   }
 };
@@ -520,8 +522,8 @@ export const fetchGroupChat = async (id) => {
   try {
     const authToken = getAuthToken();
     let url = id
-    ? `${BASE_URL}groupchat/GroupChatList?companyID=${id}`
-    : `${BASE_URL}groupchat/GroupChatList`;
+      ? `${BASE_URL}groupchat/GroupChatList?companyID=${id}`
+      : `${BASE_URL}groupchat/GroupChatList`;
     const response = await fetch(url, {
       headers: {
         'Authorization': `Bearer ${authToken}`
@@ -529,10 +531,10 @@ export const fetchGroupChat = async (id) => {
     });
 
     const data = await response.json();
-      const res = data;
-   return  res;
+    const res = data;
+    return res;
   } catch (error) {
-    console.error('Error fetching GroupChat:', error); 
+    console.error('Error fetching GroupChat:', error);
     return { success: false, error: 'Error fetching GroupChat' };
   }
 };
@@ -541,7 +543,7 @@ export const fetchChatList = async (uscomID) => {
   try {
     const authToken = getAuthToken();
     let url = `${BASE_URL}groupchat/getGroupChat?companyID=${uscomID}`;
-  
+
     const response = await fetch(url, {
       headers: {
         'Authorization': `Bearer ${authToken}`
@@ -549,18 +551,18 @@ export const fetchChatList = async (uscomID) => {
     });
 
     const data = await response.json();
-    return data.data;
+    return data;
   } catch (error) {
     console.error('Error fetching ticket list:', error);
     return { error: 'Error fetching ticket list' };
   }
 };
 
-export const postGroupchat = async (companyID, commentText,image) => {
+export const postGroupchat = async (companyID, commentText, image) => {
   try {
     const authToken = getAuthToken();
     const url = `${BASE_URL}groupchat/admin/send`;
-    
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -568,16 +570,342 @@ export const postGroupchat = async (companyID, commentText,image) => {
         'Authorization': `Bearer ${authToken}`
       },
       body: JSON.stringify({
-        companyID:companyID,
-        message:commentText,
-        image:image
+        companyID: companyID,
+        message: commentText,
+        image: image
       })
     });
-  
+
     const data = await response.json();
     return data;
   } catch (error) {
     console.error('Error postGroupchat comment:', error);
     return { error: 'Error postGroupchat comment' };
   }
+};
+
+export const adminUsers = async () => {
+  try {
+    const url = `${BASE_URL}admin/list`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.error('Error fetching admin user List:', error);
+    return { error: 'Error fetching admin user List' };
+  }
+};
+
+export const fetchDeleteAdmin = async (id) => {
+
+  try {
+
+    const response = await axios.post(
+      `${BASE_URL}admin/delete`,
+      { id: id },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    if (response.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return {
+        success: false,
+        error: response.data.message,
+      };
+    }
+  } catch (error) {
+    console.error('Error deleting company:', error);
+    return { success: false, error: 'Error deleting company' };
+  }
+};
+
+export const adminUserAdd = async (formData) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}admin/insert`,
+      JSON.stringify(formData),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+    )
+    if (response.status === 200) {
+      return {
+        success: true, data: response.data
+      };
+
+    } else {
+      return {
+        success: false,
+        error: response.data.status || 'Failed to add AdminUser',
+      };
+    }
+  } catch (error) {
+    console.error('Error adding AdminUser:', error.data);
+    return { success: false, error: error.message || 'An error occurred' };
+  }
+};
+
+export const fetchRoleList = async () => {
+  try {
+    const url = `${BASE_URL}role/list`;
+    const response = await axios.get(url);
+    const data = response.data
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};
+
+export const fecthRoleDelete = async (id) => {
+
+  try {
+
+    const response = await axios.post(
+      `${BASE_URL}role/delete`,
+      { id: id },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    if (response.status === 200) {
+      return { success: true, data: response.data };
+    } else {
+      return {
+        success: false,
+        error: response.data.message,
+      };
+    }
+  } catch (error) {
+    console.error('Error deleting company:', error);
+    return { success: false, error: 'Error deleting company' };
+  }
+}
+
+export const fetchEditShow = async (ID) => {
+
+  try {
+    let url = `${BASE_URL}admin/edit/${ID}`;
+    const response = await fetch(url);
+    const data = await response.json();
+    const res = data.response.admin
+    return res;
+  } catch (error) {
+    console.error('Error fetching adminuser:', error);
+    return { error: 'Error fetching adminuser ' };
+  }
+};
+
+export const AdminEditPost = async (formData) => {
+  try {
+
+    const response = await axios.post(
+      `${BASE_URL}admin/edit/post`, JSON.stringify(formData)
+      ,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    if (response.status === 200) {
+      return { success: true, data: response };
+    } else {
+      return {
+        success: false,
+        error: response.data.message,
+      };
+    }
+  } catch (error) {
+    console.error('Error edit:', error);
+    return { success: false, error: 'Error edit' };
+  }
+};
+
+export const RoleAdd = async (name) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}role/add`,
+      JSON.stringify(name),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+      )
+     if (response.status === 200) {
+      return { success: true, data: response
+     }; 
+
+    } else {
+      return {
+        success: false,
+        error: response.data.status || 'Failed to add AdminUser',
+      };
+    }
+  } catch (error) {
+    console.error('Error adding AdminUser:', error.data);
+    return { success: false, error: error.message || 'An error occurred' };
+}
+};
+
+export const fetchRoleEdit = async (ID) => {
+
+  try {
+    let url = `${BASE_URL}role/edit/${ID}`; 
+    const response = await fetch(url);
+    const data = await response.json(); 
+    const res = data.response.role
+    return res;
+  } catch (error) {
+    console.error('Error fetching adminuser:', error);
+    return { error: 'Error fetching adminuser ' };
+  }
+};
+
+export const roleEditRole = async (formData) => {
+  try {
+
+    const response = await axios.post(
+      `${BASE_URL}role/edit`,JSON.stringify(formData)
+     ,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+    if (response.status === 200) {
+      return { success: true, data: response };
+    } else {
+      return {
+        success: false,
+        error: response.data.message,
+      };
+    }
+  } catch (error) {
+    console.error('Error edit:', error);
+    return { success: false, error: 'Error edit' };
+  }
+};
+
+export const fetchLogs = async (token) => {
+  try {
+    const url = `${BASE_URL}logs/SystemLog`;
+    const authToken = token || getAuthToken();
+
+    const response = await axios.get(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error fetching Logs:", error);
+    throw error;
+  }
+};
+
+export const fetchErrorLogs = async (token) => {
+  try {
+    const url = `${BASE_URL}logs/ErrorLog`;
+    const authToken = token || getAuthToken();
+    const response = await axios.get(url, {
+      headers: {
+        'Authorization': `Bearer ${authToken}`,
+      },
+    });
+    return response;
+  } catch (error) {
+    console.error("Error fetching Logs:", error);
+    throw error;
+  }
+};
+
+export const fetchPermissionList = async (id) => {
+  try {
+    const url = `${BASE_URL}role/get-permission-list/${id}`;
+    const response = await axios.get(url);  
+    const data = response.data.response
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};
+
+export const fetchAllPermissionList = async () => {
+  try {
+    const url = `${BASE_URL}permission/list`;
+    const response = await axios.get(url);
+    const data = response.data.data.permissions
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};
+
+export const EditRolePermission = async (payload) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}role/permission-edit`,
+      JSON.stringify(payload),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+      )
+     if (response.status === 200) {
+      return { success: true, data: response 
+     }; 
+
+    } else {
+      return {
+        success: false,
+        error: response.data.status || 'Failed to edit RolePermission',
+      };
+    }
+  } catch (error) {
+    console.error('Error editing RolePermission:', error.data);
+    return { success: false, error: error.message || 'An error occurred' };
+}
+};
+
+export const AddRolePermission = async (payload) => {
+  try {
+    const response = await axios.post(
+      `${BASE_URL}role/permission-edit`,
+      JSON.stringify(payload),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      },
+      )
+     if (response.status === 200) {
+      return { success: true, data: response 
+     }; 
+
+    } else {
+      return {
+        success: false,
+        error: response.data.status || 'Failed to add RolePermission',
+      };
+    }
+  } catch (error) {
+    console.error('Error adding RolePermission:', error.data);
+    return { success: false, error: error.message || 'An error occurred' };
+}
 };

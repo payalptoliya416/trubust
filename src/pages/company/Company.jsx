@@ -51,6 +51,24 @@ export default function Company() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  const [permissions, setPermissions] = React.useState({
+    menu: 0,
+    create: 0,
+    edit: 0,
+    delete: 0
+  });
+  
+  React.useEffect(() => {
+    const storedPermissions = JSON.parse(localStorage.getItem('permissions')) || [];
+    const userPermissions = storedPermissions.find(item => item.name === 'company') || {};
+  
+    setPermissions({
+      menu: userPermissions.menu || 0,
+      create: userPermissions.create || 0,
+      edit: userPermissions.edit || 0,
+      delete: userPermissions.delete || 0
+    });
+  }, [setPermissions]);
 
   React.useEffect(() => {
     fetchCompanyName();
@@ -66,12 +84,12 @@ export default function Company() {
   };
   const handleView = (row) => {
     const ID = row.id
-    navigate('/signleCompany',{ state: { ID } })
+    navigate('/company/signleCompany',{ state: { ID } })
   };
 
 
   const handleEditClick = (rowData) => {
-    navigate('/addcompany', { state: { rowData } });
+    navigate('/company/addcompany', { state: { rowData } });
 };
 
   const handleDelete = async (rowData) => {
@@ -122,10 +140,13 @@ export default function Company() {
             };  
   return (
     <>
-    <div style={{marginBottom:"20px" , textAlign: "end"}}>
-    <Link to='/addcompany'>  <Button variant="contained">+ Add Company</Button></Link>
-    </div>
     <ToastContainer/>
+    {permissions.menu === 1 && (
+<>
+{permissions.create === 1 &&
+    <div style={{marginBottom:"20px" , textAlign: "end"}}>
+    <Link to='/company/addcompany'>  <Button variant="contained">+ Add Company</Button></Link>
+    </div> }
     <div style={{ marginBottom: "16px" }}>
   <Grid container spacing={2}>
     {/* Search input for Name */}
@@ -191,17 +212,19 @@ export default function Company() {
           return (
             <TableCell key={column.id} align="left">
               <div style={{ display: "flex", gap: "14px" }}>
-                <EyeOutlined
-                  style={{ color: "#1890ff", cursor: "pointer" }}
-                  onClick={() => handleView(row)}
-                />
+              {permissions.edit === 1 && (
                 <EditOutlined
                   style={{ color: "#52c41a", cursor: "pointer" }}
                   onClick={() => handleEditClick(row)}
-                />
+                />)}
+                  {permissions.delete === 1 && (
                 <DeleteOutlined
                   style={{ color: "#ff4d4f", cursor: "pointer" }}
                   onClick={() => handleDelete(row)}
+                />)}
+                <EyeOutlined
+                  style={{ color: "#1890ff", cursor: "pointer" }}
+                  onClick={() => handleView(row)}
                 />
               </div>
             </TableCell>
@@ -237,6 +260,9 @@ export default function Company() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    </>
+    )
+    }
     </>
   );
 }

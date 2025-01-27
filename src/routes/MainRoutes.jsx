@@ -18,6 +18,13 @@ const ExternalRequest = Loadable(lazy(() => import('pages/external-request/Exter
 const ExternalRequestChat = Loadable(lazy(() => import('pages/external-request/ExternalRequestChat')));
 const InternalRequest = Loadable(lazy(() => import('pages/internal-request/InternalRequest')));
 const SecureChannel = Loadable(lazy(() => import('pages/secure-channel/SecureChannel')));
+const AddAdmin = Loadable(lazy(() => import('pages/admin-user/AddAdmin')));
+const Admin = Loadable(lazy(() => import('pages/admin-user/Admin')));
+const RolePermission = Loadable(lazy(() => import('pages/admin-user/RolePermission')));
+const AddRule = Loadable(lazy(() => import('pages/admin-user/AddRule')));
+const ErrorLogs = Loadable(lazy(() => import('pages/logs/ErrorLogs')));
+const Logs = Loadable(lazy(() => import('pages/logs/Logs')));
+const AddPermission = Loadable(lazy(() => import('pages/admin-user/AddPermission')));
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
 
 // render - sample page
@@ -38,15 +45,6 @@ const MainRoutes = {
       element: <Color />
     },
     {
-      path: 'dashboard',
-      children: [
-        {
-          path: 'default',
-          element: <DashboardDefault />
-        }
-      ]
-    },
-    {
       path: 'sample-page',
       element: <SamplePage />
     },
@@ -58,37 +56,65 @@ const MainRoutes = {
       path: 'company',
       element: <Company />
     },
+    
     {
-      path: 'addcompany',
-      element: <EditCompany />
+      path: 'company',
+      children: [
+        {
+          path: 'addcompany',
+          element: <EditCompany />
+        },
+      ]
     },
+   
     {
-      path: 'signleCompany',
-      element: <SingleCompanyView />
+      path: 'company',
+      children: [
+        {
+          path: 'signleCompany',
+          element: <SingleCompanyView />
+        },
+      ]
     },
     {
       path: 'user',
       element: <UserComponent />
     },
+    
     {
-      path: 'useraddorupdate',
-      element: <AddUser />
+      path: 'user',
+      children: [
+        {
+          path: 'useraddorupdate',
+          element: <AddUser />
+        },
+      ]
     },
     {
       path: 'support-ticket',
       element: <SupportTicket />
     },
     {
-      path: 'support-ticket-chat',
-      element: <SupportTicketChat />
+      path: 'support-ticket',
+      children: [
+        {
+          path: 'support-ticket-chat',
+          element:  <SupportTicketChat />
+        }
+      ]
     },
-    {
+     {
       path: 'external-request',
       element: <ExternalRequest />
     },
     {
-      path: 'external-request-chat',
-      element: <ExternalRequestChat />
+      path: 'external-request',
+      children: [
+        {
+          path: 'external-request-chat',
+          element:  <ExternalRequestChat />
+        }
+      ]
     },
     {
       path: 'internal-request',
@@ -99,9 +125,58 @@ const MainRoutes = {
       element: <SecureChannel />
     },
     {
+      path: 'role-permission',
+      element: <RolePermission />
+    },
+    {
+      path: 'role-permission',
+      children: [
+        {
+          path: 'add-rolename',
+          element:  <AddRule />
+        }
+      ]
+    },
+    {
+      path: 'admin',
+      element: <Admin />
+    },
+    {
+      path: 'admin',
+      children: [
+        {
+          path: 'add-user',
+          element:  <AddAdmin />
+        }
+      ]
+    },
+    {
+      path: 'logs',
+      element: <Logs />
+    },
+    {
+      path: 'logs',
+      children: [
+        {
+          path: 'error-logs',
+          element: <ErrorLogs />
+        },
+      ]
+    },   
+    {
+      path: 'role-permission',
+      children: [
+        {
+          path: 'add-role-permission',
+          element: <AddPermission />
+        },
+      ]
+    },   
+    {
       path: 'typography',
       element: <Typography />
     },
+    
   ]
 };
 

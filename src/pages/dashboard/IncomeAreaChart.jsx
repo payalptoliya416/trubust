@@ -13,31 +13,30 @@ const areaChartOptions = {
     height: 450,
     type: 'area',
     toolbar: {
-      show: false
-    }
+      show: false,
+    },
   },
   dataLabels: {
-    enabled: false
+    enabled: false,
   },
   stroke: {
     curve: 'smooth',
-    width: 2
+    width: 2,
   },
   grid: {
-    strokeDashArray: 0
-  }
+    strokeDashArray: 0,
+  },
 };
 
 // ==============================|| INCOME AREA CHART ||============================== //
 
-export default function IncomeAreaChart({ slot }) {
+export default function IncomeAreaChart({ slot, chartData }) {
   const theme = useTheme();
 
   const { primary, secondary } = theme.palette.text;
   const line = theme.palette.divider;
 
   const [options, setOptions] = useState(areaChartOptions);
-
   useEffect(() => {
     setOptions((prevState) => ({
       ...prevState,
@@ -49,66 +48,64 @@ export default function IncomeAreaChart({ slot }) {
             : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         labels: {
           style: {
-            colors: [
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary
-            ]
-          }
+            colors: Array(slot === 'month' ? 12 : 7).fill(secondary),
+          },
         },
         axisBorder: {
           show: true,
-          color: line
+          color: line,
         },
-        tickAmount: slot === 'month' ? 11 : 7
+        tickAmount: slot === 'month' ? 11 : 6,
       },
       yaxis: {
         labels: {
           style: {
-            colors: [secondary]
-          }
-        }
+            colors: [secondary],
+          },
+        },
       },
       grid: {
-        borderColor: line
-      }
+        borderColor: line,
+      },
     }));
   }, [primary, secondary, line, theme, slot]);
 
-  const [series, setSeries] = useState([
-    {
-      name: 'Page Views',
-      data: [0, 86, 28, 115, 48, 210, 136]
-    },
-    {
-      name: 'Sessions',
-      data: [0, 43, 14, 56, 24, 105, 68]
-    }
-  ]);
+  const [series, setSeries] = useState([]);
 
   useEffect(() => {
     setSeries([
       {
         name: 'Page Views',
-        data: slot === 'month' ? [76, 85, 101, 98, 87, 105, 91, 114, 94, 86, 115, 35] : [31, 40, 28, 51, 42, 109, 100]
+        data: (chartData || []).map((item) => ({
+          x:
+            slot === 'month'
+              ? item.x.toLocaleDateString('default', { month: 'short', year: 'numeric' })
+              : item.x.toLocaleDateString('default', { weekday: 'short' }),
+          y: item.y,
+        })),
       },
       {
         name: 'Sessions',
-        data: slot === 'month' ? [110, 60, 150, 35, 60, 36, 26, 45, 65, 52, 53, 41] : [11, 32, 45, 32, 34, 52, 41]
-      }
+        data: (chartData || []).map((item) => ({
+          x:
+            slot === 'month'
+              ? item.x.toLocaleDateString('default', { month: 'short', year: 'numeric' })
+              : item.x.toLocaleDateString('default', { weekday: 'short' }),
+          y: item.y,
+        })),
+      },
     ]);
-  }, [slot]);
+  }, [slot, chartData]);
 
   return <ReactApexChart options={options} series={series} type="area" height={450} />;
 }
 
-IncomeAreaChart.propTypes = { slot: PropTypes.string };
+IncomeAreaChart.propTypes = {
+  slot: PropTypes.string.isRequired,
+  chartData: PropTypes.arrayOf(
+    PropTypes.shape({
+      x: PropTypes.instanceOf(Date).isRequired,
+      y: PropTypes.number.isRequired,
+    })
+  ),
+};

@@ -16,7 +16,6 @@ import IncomeAreaChart from './IncomeAreaChart';
 export default function UniqueVisitorCard(props) {
   const {chartData  , ID} = props;
   const [slot, setSlot] = useState('week');
-  
   return (
     <>
       <Grid container alignItems="center" justifyContent="space-between">

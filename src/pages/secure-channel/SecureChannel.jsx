@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Box, TextField, IconButton, Typography, Avatar, Paper, Stack, Container ,InputAdornment, Card,  useTheme, ThemeProvider,CssBaseline,useMediaQuery,Drawer,Toolbar} from "@mui/material";
-import { styled } from "@mui/system";
+import { Box, TextField, IconButton, Typography, Avatar, Paper, Stack, Container ,InputAdornment, Card,  useTheme, ThemeProvider,CssBaseline,useMediaQuery,Drawer,Toolbar, CircularProgress} from "@mui/material";
+import { display, fontSize, styled } from "@mui/system";
 import { IoSearch, IoSend, IoMenu,  } from "react-icons/io5";
 import { fetchChatList, fetchGroupChat, postGroupchat } from "api/Data";
 import { io } from 'socket.io-client';
 import { MdImage } from "react-icons/md";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { toast, ToastContainer } from "react-toastify";
+import { HiMiniUsers } from "react-icons/hi2";
 
 const StyledChatContainer = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -78,7 +80,6 @@ const SecureChannel = () => {
   const [comName,setComName] = useState('');
   const [list ,setList] = useState([]);
      const [selectedImage , setSelectedImage] = useState(null);
-
   const loginCompanyID =  JSON.parse(localStorage.getItem('logindetail')) || [];
   const ID = loginCompanyID.companyID
 
@@ -93,6 +94,24 @@ const SecureChannel = () => {
       socket.disconnect();
     };
   }, [companyIDD]);
+  const [permissions, setPermissions] = useState({
+    menu: 0,
+    create: 0,
+    edit: 0,
+    delete: 0
+  });
+
+  useEffect(() => {
+    const storedPermissions = JSON.parse(localStorage.getItem('permissions')) || [];
+    const userPermissions = storedPermissions.find(item => item.name === 'groupchat') || {};
+  
+    setPermissions({
+      menu: userPermissions.menu || 0,
+      create: userPermissions.create || 0,
+      edit: userPermissions.edit || 0,
+      delete: userPermissions.delete || 0
+    });
+  }, []);
 
   useEffect(() => {
     if (ID !== 0 && rowData.length > 0) {
@@ -103,7 +122,6 @@ const SecureChannel = () => {
 
 
   const handleDrawerToggle = async (contact) => {
-    console.log("contact",contact)
     setMobileOpen(!mobileOpen);
     setCompanyIDD(contact.companyID);
     await handleDataOperations(contact);
@@ -119,10 +137,11 @@ const SecureChannel = () => {
     try {
       const uscomID = contact.companyID;
       const data = await fetchChatList(uscomID);
-      console.log("data",data)
+    if(data.status === false){
+      toast.error(data.message)
+    }else{
       setList(data);
-
-      
+    }
     } catch (error) {
       console.error('Error fetching ticket replay:', error);
     } finally {
@@ -169,7 +188,6 @@ const SecureChannel = () => {
   const handleSearch = (event) => {
     const searchTerm = event.target.value;
     setSearchTerm(searchTerm);
-  console.log("rowData",rowData)
 
     const filteredData = rowData.filter(item =>
       item.company_name && item.company_name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -261,8 +279,10 @@ const SecureChannel = () => {
     };
 
   return (
-    <>
+    <>  { permissions.menu === 1 &&(
+      <>
       <CssBaseline />
+      <ToastContainer/>
       <Container maxWidth="xl" sx={{ height: "76vh", p: { xs: 0, md: 2 } }}>
             {isMobile && (
           <Toolbar>
@@ -294,7 +314,10 @@ const SecureChannel = () => {
           )}
 
           <ChatArea elevation={2}>
-            <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
+          {
+            list?.data && list?.data?.length > 0   ? (
+              <>
+              <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
               <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                 <Avatar
                   src={comName.company_logo}
@@ -303,7 +326,6 @@ const SecureChannel = () => {
                 <Typography variant="h6">{comName.company_name}</Typography>
               </Box>
             </Box>
-
             <Box
               sx={{
                 flex: 1,
@@ -315,7 +337,7 @@ const SecureChannel = () => {
                 p: 1,
               }}
             >
-              {list.map((message) => {
+              {list?.data?.map((message) => {
                 const createdDate = new Date(message.created_at);
     const formattedDate = !isNaN(createdDate.getTime())
       ? createdDate.toLocaleString("en-US", {
@@ -392,7 +414,6 @@ const SecureChannel = () => {
                 </MessageContainer>
               )})}
             </Box>
-
            <InputArea>
              <Box
                sx={{
@@ -479,9 +500,23 @@ const SecureChannel = () => {
                </IconButton>
              </Box>
            </InputArea>
+              </>
+            ):(
+              <>
+            {loading ? <div style={{display: "flex" , justifyContent:"center", alignItems: "center" , height:"100%" , width:"100%"}}><CircularProgress /></div>:
+              <Box style={{height: "100%", width: "100%", display:"flex", justifyContent: "center" , alignItems:"center"}}>
+              <HiMiniUsers  style={{fontSize: "80px"}}/>
+              </Box>
+            }
+              </>
+            )
+          }
+           
           </ChatArea>
         </StyledChatContainer>
       </Container>
+      </>
+      )}
       </>
   );
 };

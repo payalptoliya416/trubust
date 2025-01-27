@@ -27,10 +27,9 @@ import AnimateButton from 'components/@extended/AnimateButton';
 // assets
 import EyeOutlined from '@ant-design/icons/EyeOutlined';
 import EyeInvisibleOutlined from '@ant-design/icons/EyeInvisibleOutlined';
-import FirebaseSocial from './FirebaseSocial';
 import { fetchLogin } from 'api/Data';
 
-export default function AuthLogin({ isDemo = false }) {
+export default function AuthLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -202,16 +201,6 @@ export default function AuthLogin({ isDemo = false }) {
                 </Button>
               </AnimateButton>
             </Grid>
-
-            {/* <Grid item xs={12}>
-              <Divider>
-                <Typography variant="caption">Login with</Typography>
-              </Divider>
-            </Grid> */}
-
-            {/* <Grid item xs={12}>
-              <FirebaseSocial />
-            </Grid> */}
           </Grid>
         </form>
       )}

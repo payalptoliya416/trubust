@@ -13,6 +13,8 @@ import ProfileOutlined from '@ant-design/icons/ProfileOutlined';
 import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
 import UserOutlined from '@ant-design/icons/UserOutlined';
 import WalletOutlined from '@ant-design/icons/WalletOutlined';
+import { useNavigate } from 'react-router';
+import { removeAuthTokenFromLocalStorage } from 'api/Data';
 
 // ==============================|| HEADER PROFILE - PROFILE TAB ||============================== //
 
@@ -22,10 +24,15 @@ export default function ProfileTab() {
   const handleListItemClick = (index) => {
     setSelectedIndex(index);
   };
+  const navigate = useNavigate();
+  const handleLogOut = ()=>{
+    removeAuthTokenFromLocalStorage();
+    navigate('/login')
+  }
 
   return (
     <List component="nav" sx={{ p: 0, '& .MuiListItemIcon-root': { minWidth: 32 } }}>
-      <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0, '/apps/profiles/user/personal')}>
+      {/* <ListItemButton selected={selectedIndex === 0} onClick={(event) => handleListItemClick(event, 0, '/apps/profiles/user/personal')}>
         <ListItemIcon>
           <EditOutlined />
         </ListItemIcon>
@@ -49,8 +56,8 @@ export default function ProfileTab() {
           <WalletOutlined />
         </ListItemIcon>
         <ListItemText primary="Billing" />
-      </ListItemButton>
-      <ListItemButton selected={selectedIndex === 2}>
+      </ListItemButton> */}
+      <ListItemButton selected={selectedIndex === 2} onClick={handleLogOut}>
         <ListItemIcon>
           <LogoutOutlined />
         </ListItemIcon>

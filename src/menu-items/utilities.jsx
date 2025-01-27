@@ -13,6 +13,8 @@ import { FaTicket } from "react-icons/fa6";
 import { IoGitPullRequestSharp } from "react-icons/io5";
 import { CgInternal } from "react-icons/cg";
 import { PiWechatLogoFill } from "react-icons/pi";
+import { GrUserAdmin } from "react-icons/gr";
+import { MdOutlineError } from "react-icons/md";
 // icons
 const icons = {
   FontSizeOutlined,
@@ -26,7 +28,9 @@ const icons = {
   FaTicket ,
   IoGitPullRequestSharp ,
   CgInternal ,
-  PiWechatLogoFill
+  PiWechatLogoFill,
+  GrUserAdmin ,
+  MdOutlineError 
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -36,27 +40,27 @@ const utilities = {
   title: 'Utilities',
   type: 'group',
   children: [
-    {
-      id: 'util-typography',
-      title: 'Typography',
-      type: 'item',
-      url: '/typography',
-      icon: icons.FontSizeOutlined
-    },
-    {
-      id: 'util-color',
-      title: 'Color',
-      type: 'item',
-      url: '/color',
-      icon: icons.BgColorsOutlined
-    },
-    {
-      id: 'util-shadow',
-      title: 'shadow',
-      type: 'item',
-      url: '/shadow',
-      icon: icons.BarcodeOutlined
-    },
+    // {
+    //   id: 'util-typography',
+    //   title: 'Typography',
+    //   type: 'item',
+    //   url: '/typography',
+    //   icon: icons.FontSizeOutlined
+    // },
+    // {
+    //   id: 'util-color',
+    //   title: 'Color',
+    //   type: 'item',
+    //   url: '/color',
+    //   icon: icons.BgColorsOutlined
+    // },
+    // {
+    //   id: 'util-shadow',
+    //   title: 'shadow',
+    //   type: 'item',
+    //   url: '/shadow',
+    //   icon: icons.BarcodeOutlined
+    // },
     {
       id: 'company',
       title: 'Company',
@@ -99,7 +103,35 @@ const utilities = {
       url: '/secure-channel',
       icon: icons.PiWechatLogoFill
     },
-
+    {
+      id: 'admin-users',
+      title: 'Admin Users',
+      type: 'collapse', 
+      icon: icons.GrUserAdmin,
+      children: [
+        {
+          id: 'admin',
+          title: 'Admin',
+          type: 'item',
+          url: '/admin',
+          icon: icons.FaList
+        },
+        {
+          id: 'role-permission',
+          title: 'Role & Permission',
+          type: 'item',
+          url: '/role-permission',
+          icon: icons.FaCog
+        }
+      ]
+    },
+    {
+      id: 'logs',
+      title: 'Logs',
+      type: 'item',
+      url: '/logs',
+      icon: icons.MdOutlineError 
+    },
   ]
 };
 

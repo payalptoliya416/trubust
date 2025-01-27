@@ -7,7 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import Button from '@mui/material/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
@@ -106,13 +106,14 @@ export default function UserComponent() {
         }
       };
       const handleEditClick = (rowData) => {
-        navigate('/useraddorupdate', { state: { rowData } });
+        navigate('/user/useraddorupdate', { state: { rowData } });
     };
     const [searchTerm, setSearchTerm] = React.useState({
         name:'',
         email: '',
         phone:''
         });
+
         const handleSearch = async (event) => {
             const { name, value } = event.target;
             const newSearchTerm = { ...searchTerm, [name]: value };
@@ -141,10 +142,12 @@ export default function UserComponent() {
 
   return (
     <>
+    {  permissions.menu === 1 && (
+      <>
+      { permissions.create === 1 &&(
        <div style={{marginBottom:"20px" , textAlign: "end"}}>
-    <Link to='/useraddorupdate'>  <Button variant="contained">+ Add User</Button></Link>
-    </div>
-
+    <Link to='/user/useraddorupdate'>  <Button variant="contained">+ Add User</Button></Link>
+    </div>)}
     <ToastContainer/>
     <div style={{ marginBottom: "16px" }}>
   <Grid container spacing={2}>
@@ -184,8 +187,7 @@ export default function UserComponent() {
       />
     </Grid>
   </Grid>
-</div>
-
+    </div>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 580 }}>
           <Table stickyHeader aria-label="sticky table">
@@ -218,14 +220,16 @@ export default function UserComponent() {
                         return (
                           <TableCell key={column.id} align="left">
                             <div style={{ display: 'flex', gap: '14px' }}>
+                            {permissions.edit === 1 &&
                               <EditOutlined
                                 style={{ color: '#52c41a', cursor: 'pointer' }}
                                 onClick={() => handleEditClick(row)}
-                              />
+                              />}
+                               {permissions.delete === 1 &&
                               <DeleteOutlined
                                 style={{ color: '#ff4d4f', cursor: 'pointer' }}
                                 onClick={() => handleDeleteClick(row)}
-                              />
+                              />}
                               <Button
                                 variant="outlined"
                                 style={{ padding: '1px 6px', fontSize: '11px' }}
@@ -258,6 +262,8 @@ export default function UserComponent() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
+      </>
+    )}
     </>
   )
 }
