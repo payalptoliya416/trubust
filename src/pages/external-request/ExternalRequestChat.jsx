@@ -195,7 +195,7 @@ export default function ExternalRequestChat() {
       p={1}
       borderRadius="4px 4px 0 0"
       boxShadow={1}
-      marginBottom='55px'
+      marginBottom='25px'
     >
    <div>
     <Link to='/external-request'>  <Button variant="contained">Back</Button></Link>

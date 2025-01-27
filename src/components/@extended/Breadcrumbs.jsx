@@ -23,6 +23,7 @@ export default function Breadcrumbs({ navigation, title, ...others }) {
           getCollapse(collapse);
         } else if (collapse.type && collapse.type === 'item') {
           if (location.pathname === collapse.url) {
+            console.log("collapse",collapse)
             setMain(menu);
             setItem(collapse);
           }
@@ -67,7 +68,6 @@ export default function Breadcrumbs({ navigation, title, ...others }) {
       </Typography>
     );
 
-    // main
     if (item.breadcrumbs !== false) {
       breadcrumbContent = (
         <MainCard border={false} sx={{ mb: 3, bgcolor: 'transparent' }} {...others} content={false}>

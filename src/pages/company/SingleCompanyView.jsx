@@ -31,7 +31,7 @@ export default function SingleCompanyView() {
         <Link to='/company'>  <Button variant="contained">Back</Button></Link>
       </div>
       <Grid container spacing={2} mb={4}>
-  <Grid item xs={6}>
+  <Grid item xs={12} lg={6}>
   <Card 
   sx={{ 
     textAlign: 'center', 
@@ -49,11 +49,12 @@ export default function SingleCompanyView() {
       borderRadius: '50%', 
       margin: '0 auto', 
       backgroundColor: 'rgba(115, 103, 240, 0.25)', 
-      objectFit: 'contain' 
+      objectFit: '100% 100%' 
     }}
     image={singleCompnay.companyLogo}
     alt={`logo`}
   />
+
   <CardContent>
     <Typography 
       variant="h5" 
@@ -124,7 +125,7 @@ export default function SingleCompanyView() {
   </CardContent>
 </Card>
   </Grid>
-  <Grid item xs={6}>
+  <Grid item xs={12} lg={6}>
   <EndPointList/>
   </Grid>
    </Grid>

@@ -18,7 +18,7 @@ const iconSX = { fontSize: '0.75rem', color: 'inherit', marginLeft: 0, marginRig
 
 export default function AnalyticEcommerce({ color = 'primary', title, count, percentage, isLoss, extra }) {
   return (
-    <MainCard contentSX={{ p: 2.25 }}>
+    <MainCard contentSX={{ p: 2 }}>
       <Stack spacing={0.5}>
         <Typography variant="h6" color="text.secondary">
           {title}
@@ -34,9 +34,8 @@ export default function AnalyticEcommerce({ color = 'primary', title, count, per
               <Chip
                 variant="combined"
                 color={color}
-                icon={isLoss ? <FallOutlined style={iconSX} /> : <RiseOutlined style={iconSX} />}
                 label={`${percentage}`}
-                sx={{ ml: 1.25, pl: 1 }}
+                sx={{ ml: 1.25}}
                 size="small"
               />
             </Grid>

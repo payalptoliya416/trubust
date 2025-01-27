@@ -12,7 +12,7 @@ import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
 import Button from '@mui/material/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import { Grid, TextField } from '@mui/material';
+import { Box, CircularProgress, Grid, TextField, Typography } from '@mui/material';
 
 const columns = [
   { 
@@ -44,6 +44,7 @@ export default function Company() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [rowData, setRowData] = React.useState([]);
   const navigate = useNavigate();
+     const [loading, setLoading] = React.useState(true);
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -75,9 +76,11 @@ export default function Company() {
   }, []);
 
   const fetchCompanyName = async () => {
+    setLoading(true);
     try {
       const response = await fetchData();
       setRowData(response.data.data);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching default user list:", error);
     }
@@ -190,6 +193,7 @@ export default function Company() {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
+            
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
@@ -201,9 +205,24 @@ export default function Company() {
               ))}
             </TableRow>
           </TableHead>
-         
 <TableBody>
-  {rowData
+  {loading ? (
+    <TableRow>
+            <TableCell colSpan={columns.length} style={{ padding: 0 }}>
+              <Box
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '300px', // Adjust height as needed
+                  width: '100%',
+                }}
+              >
+                <CircularProgress />
+              </Box>
+            </TableCell>
+          </TableRow>
+          ) : rowData
   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
   .map((row) => (
     <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>

@@ -136,17 +136,19 @@ try {
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <AnalyticEcommerce title=" Pending External Requests" count={`${extrenal ? extrenal.pendingRequest :""}`} percentage={`${extrenal ? extrenal.pendingRequestsPercentage :""}`} isLoss color="warning" extra="$20,395" />
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <AnalyticEcommerce title="Internal Requests sent" count={`${internal ? internal.totalRequest :""}`} percentage='' extra="35,000" />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <AnalyticEcommerce title="External Requests sent" count={`${extrenal ? extrenal.totalRequest :""}`} percentage='' extra="8,900" />
-        </Grid>
         <Grid item xs={12} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
-        <Grid item xs={12} md={7} lg={8}>
+        <Grid item xs={12} md={12} lg={12}>
           <UniqueVisitorCard  chartData={chartData} ID={ID}/>
         </Grid>
-        <Grid item xs={12} md={7} lg={4}>
+        <Grid item xs={12} sm={12} md={6} lg={6}>
+        <Grid item xs={12} sm={12} md={12} lg={12} mt={5}>
+          <AnalyticEcommerce title="Internal Requests sent" count={`${internal ? internal.totalRequest :""}`} percentage='' extra="65,000" />
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12} mt={5}>
+          <AnalyticEcommerce title="External Requests sent" count={`${extrenal ? extrenal.totalRequest :""}`} percentage='' extra="8,900" />
+        </Grid>
+        </Grid>
+        <Grid item xs={12} md={6} lg={6}>
           <Grid container alignItems="center" justifyContent="space-between">
             <Grid item>
               <Typography variant="h5">Top 5 Companies</Typography>
@@ -158,6 +160,7 @@ try {
           </MainCard>
         </Grid>
       </Grid>
+      
      ) }
     </>
   );

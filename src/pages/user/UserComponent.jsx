@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import { fetchDeleteUser, fetchUserList, sendVerification } from 'api/Data';
-import { Grid, TextField } from '@mui/material';
+import { Box, CircularProgress, Grid, TextField } from '@mui/material';
 
 const columns = [
     { 
@@ -31,6 +31,7 @@ export default function UserComponent() {
       const [rowsPerPage, setRowsPerPage] = React.useState(10);
       const [rowData, setRowData] = React.useState([]);
       const navigate = useNavigate();
+         const [loading, setLoading] = React.useState(true);
       const handleChangePage = (event, newPage) => {
         setPage(newPage);
       };
@@ -47,10 +48,12 @@ export default function UserComponent() {
       const ID = loginCompanyID.companyID
       
       const fetchDefaultUserList = async () => {
+        setLoading(true);
         try {
           const response = await fetchUserList(ID === 0 ? null : ID);
           if (response.success) {
             setRowData(response.data.data);
+            setLoading(false);
           } else {
             console.error('Failed to fetch default user list:', response.error);
           }
@@ -211,7 +214,23 @@ export default function UserComponent() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {rowData
+              {loading ? (
+    <TableRow>
+            <TableCell colSpan={columns.length} style={{ padding: 0 }}>
+              <Box
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '300px', // Adjust height as needed
+                  width: '100%',
+                }}
+              >
+                <CircularProgress />
+              </Box>
+            </TableCell>
+          </TableRow>
+          ) : rowData
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>

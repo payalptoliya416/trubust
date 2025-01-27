@@ -40,27 +40,7 @@ const utilities = {
   title: 'Utilities',
   type: 'group',
   children: [
-    // {
-    //   id: 'util-typography',
-    //   title: 'Typography',
-    //   type: 'item',
-    //   url: '/typography',
-    //   icon: icons.FontSizeOutlined
-    // },
-    // {
-    //   id: 'util-color',
-    //   title: 'Color',
-    //   type: 'item',
-    //   url: '/color',
-    //   icon: icons.BgColorsOutlined
-    // },
-    // {
-    //   id: 'util-shadow',
-    //   title: 'shadow',
-    //   type: 'item',
-    //   url: '/shadow',
-    //   icon: icons.BarcodeOutlined
-    // },
+
     {
       id: 'company',
       title: 'Company',
