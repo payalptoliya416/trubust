@@ -120,10 +120,7 @@ export default function ExtrnalRequest({ singleCompnay }) {
             const tabExternal = response.data.data;
             
             if (singleCompnay && singleCompnay.id) {
-                console.log("singleCompnay.id",singleCompnay.id)
-                console.log("sas", tabExternal.filter(item => item.companyID === singleCompnay.id))
                 const filteredData = tabExternal.filter(item => item.companyID === singleCompnay.id);
-                console.log("filteredData",filteredData)
                 setRequestData(filteredData);
             }
         } catch (error) {

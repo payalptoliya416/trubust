@@ -120,25 +120,26 @@ const SecureChannel = () => {
     }
   }, [ID, rowData]);
 
-
+const handleMobileOpen = () =>{
+  setMobileOpen(!mobileOpen);
+}
   const handleDrawerToggle = async (contact) => {
     setMobileOpen(!mobileOpen);
     setCompanyIDD(contact.companyID);
     await handleDataOperations(contact);
   };
- 
+
   const handleDataOperations = async (contact) => {
     setComId(contact.companyID);
     setComName(contact);
     setLoading(true);
-    if (window.matchMedia("(max-width: 640px)").matches) {
-      setResponsiveChat(true);
-    }
+
     try {
       const uscomID = contact.companyID;
       const data = await fetchChatList(uscomID);
     if(data.status === false){
       toast.error(data.message)
+      setList([])
     }else{
       setList(data);
     }
@@ -241,7 +242,7 @@ const SecureChannel = () => {
       </Stack>
     </>
   );
- const handleImageChange = (e) => {
+  const handleImageChange = (e) => {
             const file = e.target.files[0];
             if (file) {
               const reader = new FileReader();
@@ -250,10 +251,10 @@ const SecureChannel = () => {
               };
               reader.readAsDataURL(file);
             }
-          };
-          const handleCancelImage = () => {
+  };
+  const handleCancelImage = () => {
             setSelectedImage(null); 
-          };
+   };
  const handleSendMessage = (e) => {
              e.preventDefault();
               if (newMessage.trim() !== "" || selectedImage) {
@@ -289,7 +290,7 @@ const SecureChannel = () => {
               <IconButton
                 color="inherit"
                 edge="start"
-                onClick={handleDrawerToggle}
+                onClick={handleMobileOpen}
                 sx={{ mr: 2 }}
               >
                 <IoMenu />
@@ -303,7 +304,7 @@ const SecureChannel = () => {
               variant="temporary"
               anchor="left"
               open={mobileOpen}
-              onClose={handleDrawerToggle}
+              onClose={handleMobileOpen}
               ModalProps={{ keepMounted: true }}
               sx={{ "& .MuiDrawer-paper": { width: "80%" } }}
             >

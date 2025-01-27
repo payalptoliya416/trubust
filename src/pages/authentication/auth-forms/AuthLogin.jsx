@@ -151,35 +151,6 @@ export default function AuthLogin() {
               )}
             </Grid>
 
-            <Grid item xs={12}>
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-                spacing={2}
-              >
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      name="rememberMe"
-                      checked={values.rememberMe}
-                      onChange={handleChange}
-                      color="primary"
-                    />
-                  }
-                  label="Keep me signed in"
-                />
-                <Link
-                  variant="h6"
-                  component={RouterLink}
-                  to="/forgot-password"
-                  color="text.primary"
-                >
-                  Forgot Password?
-                </Link>
-              </Stack>
-            </Grid>
-
             {errors.submit && (
               <Grid item xs={12}>
                 <FormHelperText error>{errors.submit}</FormHelperText>
