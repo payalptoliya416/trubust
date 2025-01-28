@@ -20,7 +20,7 @@ const pages = {
       type: 'item',
       url: '/login',
       icon: icons.LoginOutlined,
-      target: true
+      target: false
     },
     // {
     //   id: 'register1',

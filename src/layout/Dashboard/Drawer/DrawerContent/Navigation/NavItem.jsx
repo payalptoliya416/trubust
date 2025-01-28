@@ -23,7 +23,7 @@ export default function NavItem({ item, level }) {
 
   let itemTarget = '_self';
   if (item.target) {
-    itemTarget = '';
+    itemTarget = '_blank';
   }
   let listItemProps = { component: forwardRef((props, ref) => <Link ref={ref} {...props} to={item.url} target={itemTarget} />) };
   if (item?.external) {
