@@ -512,7 +512,6 @@ const handleMobileOpen = () =>{
               </>
             )
           }
-           
           </ChatArea>
         </StyledChatContainer>
       </Container>

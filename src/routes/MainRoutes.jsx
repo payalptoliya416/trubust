@@ -41,6 +41,10 @@ const MainRoutes = {
       element: <DashboardDefault />
     },
     {
+      path: '*',
+      element: <DashboardDefault />
+    },
+    {
       path: 'color',
       element: <Color />
     },
