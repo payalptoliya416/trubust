@@ -198,7 +198,7 @@ export default function ExternalRequestChat() {
       marginBottom='25px'
     >
    <div>
-    <Link to='/external-request'>  <Button variant="contained">Back</Button></Link>
+    <Link to='/external-request'>  <Button variant="contained" style={{padding :"4px 23px"}}>Back</Button></Link>
     </div>
 
       <Box>

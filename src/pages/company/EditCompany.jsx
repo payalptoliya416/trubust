@@ -26,27 +26,73 @@ export default function EditCompany() {
         mostUsedPlatforms: "",
       });
 
-      useEffect(() => {
-        if (EditRowData) {
-            setFormData({
-                companyID:EditRowData.id || 0,
-                name: EditRowData.name || "",
-                email: EditRowData.email || "",
-                companyLocations: EditRowData.companyLocations || "",
-                companyLogo: EditRowData.companyLogo || "",
-                totalEmployers: EditRowData.totalEmployers || "",
-                bussinessActivity: EditRowData.bussinessActivity || "",
-                clients: EditRowData.clients || "",
-                serviceAndProduct: EditRowData.serviceAndProduct || "",
-                providers: EditRowData.providers || "",
-                reportingOfficer: EditRowData.reportingOfficer || "",
-                msp: EditRowData.msp || "",
-                previosAttacks: EditRowData.previosAttacks || "",
-                securityAssets: EditRowData.securityAssets || "",
-                mostUsedPlatforms: EditRowData.mostUsedPlatforms || "",
-            });
-        }
-    }, [EditRowData]);
+    //   useEffect(() => {
+    //     if (EditRowData) {
+    //       console.log("EditRowData",reader.readAsDataURL(EditRowData.companyLogo)),
+          
+    //         setFormData({
+    //             companyID:EditRowData.id || 0,
+    //             name: EditRowData.name || "",
+    //             email: EditRowData.email || "",
+    //             companyLocations: EditRowData.companyLocations || "",
+    //             companyLogo:   reader.readAsDataURL(EditRowData.companyLogo) || "",
+    //             totalEmployers: EditRowData.totalEmployers || "",
+    //             bussinessActivity: EditRowData.bussinessActivity || "",
+    //             clients: EditRowData.clients || "",
+    //             serviceAndProduct: EditRowData.serviceAndProduct || "",
+    //             providers: EditRowData.providers || "",
+    //             reportingOfficer: EditRowData.reportingOfficer || "",
+    //             msp: EditRowData.msp || "",
+    //             previosAttacks: EditRowData.previosAttacks || "",
+    //             securityAssets: EditRowData.securityAssets || "",
+    //             mostUsedPlatforms: EditRowData.mostUsedPlatforms || "",
+    //         });
+    //     }
+    // }, [EditRowData]);
+
+    useEffect(() => {
+      if (EditRowData) {
+  
+          const convertImageUrlToBase64 = async (imageUrl) => {
+              const response = await fetch(imageUrl);
+              const blob = await response.blob();
+              const reader = new FileReader();
+              
+              return new Promise((resolve, reject) => {
+                  reader.onloadend = () => resolve(reader.result); 
+                  reader.onerror = reject; 
+                  reader.readAsDataURL(blob);
+              });
+          };
+  
+          const fetchLogoBase64 = async () => {
+                  try {
+                      const base64Logo = await convertImageUrlToBase64(EditRowData.companyLogo);
+                      setFormData({
+                          companyID: EditRowData.id || 0,
+                          name: EditRowData.name || '',
+                          email: EditRowData.email || '',
+                          companyLocations: EditRowData.companyLocations || '',
+                          companyLogo: base64Logo || '',
+                          totalEmployers: EditRowData.totalEmployers || '',
+                          bussinessActivity: EditRowData.bussinessActivity || '',
+                          clients: EditRowData.clients || '',
+                          serviceAndProduct: EditRowData.serviceAndProduct || '',
+                          providers: EditRowData.providers || '',
+                          reportingOfficer: EditRowData.reportingOfficer || '',
+                          msp: EditRowData.msp || '',
+                          previosAttacks: EditRowData.previosAttacks || '',
+                          securityAssets: EditRowData.securityAssets || '',
+                          mostUsedPlatforms: EditRowData.mostUsedPlatforms || '',
+                      });
+                  } catch (error) {
+                      console.error('Error converting image to Base64:', error);
+                  }
+          };
+  
+          fetchLogoBase64(); // Call the async function to handle the logo
+      }
+  }, [EditRowData]);
 
       const [errors, setErrors] = useState({});
     
@@ -131,7 +177,7 @@ export default function EditCompany() {
   return (
     <>
       <div style={{marginBottom:"20px" , textAlign: "end"}}>
-    <Link to='/company'>  <Button variant="contained">Back</Button></Link>
+    <Link to='/company'>  <Button variant="contained" style={{padding :"4px 23px"}}>Back</Button></Link>
     </div>
     <div className="bg-white shadow-md p-4">
       <div className="flex justify-between items-center mb-5">

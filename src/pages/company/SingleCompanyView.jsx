@@ -28,7 +28,7 @@ export default function SingleCompanyView() {
   return (
     <>
       <div style={{ marginBottom: "20px", textAlign: "end" }}>
-        <Link to='/company'>  <Button variant="contained">Back</Button></Link>
+        <Link to='/company'>  <Button variant="contained" style={{padding :"4px 23px"}}>Back</Button></Link>
       </div>
       <Grid container spacing={2} mb={4}>
   <Grid item xs={12} lg={6}>

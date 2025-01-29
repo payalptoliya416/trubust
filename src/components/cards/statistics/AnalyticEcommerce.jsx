@@ -16,7 +16,7 @@ import FallOutlined from '@ant-design/icons/FallOutlined';
 
 const iconSX = { fontSize: '0.75rem', color: 'inherit', marginLeft: 0, marginRight: 0 };
 
-export default function AnalyticEcommerce({ color = 'primary', title, count, percentage, isLoss, extra }) {
+export default function AnalyticEcommerce({ color = 'primary', title, count, percentage, isLoss }) {
   return (
     <MainCard contentSX={{ p: 2 }}>
       <Stack spacing={0.5}>
@@ -29,17 +29,21 @@ export default function AnalyticEcommerce({ color = 'primary', title, count, per
               {count}
             </Typography>
           </Grid>
+        </Grid>
+        <Grid container alignItems="center">
           {percentage && (
             <Grid item>
               <Chip
                 variant="combined"
                 color={color}
                 label={`${percentage}`}
-                sx={{ ml: 1.25}}
                 size="small"
               />
             </Grid>
           )}
+          {isLoss ? <Typography variant="h6" color="text.secondary" ml={1}>
+            than last week
+            </Typography>:""}
         </Grid>
       </Stack>
     </MainCard>

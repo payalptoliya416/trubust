@@ -95,7 +95,7 @@ navigate('add-role-permission', { state: { row } })
     return (
         <>
    <div style={{marginBottom:"20px" , textAlign: "end"}}>
-    <Link to='/role-permission/add-rolename'>  <Button variant="contained">+ Add Role</Button></Link>
+    <Link to='/role-permission/add-rolename'>  <Button variant="contained" >+ Add Role</Button></Link>
     </div>
       <ToastContainer/>
       <Paper sx={{ width: '100%', overflow: 'hidden' }}>

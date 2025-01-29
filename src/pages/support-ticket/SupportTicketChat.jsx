@@ -159,7 +159,7 @@ export default function SupportTicketChat() {
          { permissions.menu === 1 &&(
             <>
             <div style={{marginBottom:"20px" , textAlign: "end"}}>
-    <Link to='/support-ticket'>  <Button variant="contained">Back</Button></Link>
+    <Link to='/support-ticket'>  <Button variant="contained"  style={{padding :"4px 23px"}}>Back</Button></Link>
     </div>
       <ChatContainer>
       {  loading  ?  <div style={{display: "flex" , justifyContent:"center", alignItems: "center" , height:"100%" , width:"100%"}}><CircularProgress /></div> : ""}

@@ -35,10 +35,13 @@ const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')))
 const MainRoutes = {
   path: '/',
   element: <Dashboard />,
+  id: 'group-dashboard',
+  title: 'Navigation',
+  type: 'group',
   children: [
     {
       path: '/',
-      element: <DashboardDefault />
+      element: <DashboardDefault />,
     },
     {
       path: '*',
@@ -65,8 +68,10 @@ const MainRoutes = {
       path: 'company',
       children: [
         {
-          path: 'addcompany',
-          element: <EditCompany />
+          path: 'company-add-update',
+          element: <EditCompany />,
+         
+
         },
       ]
     },
@@ -89,7 +94,7 @@ const MainRoutes = {
       path: 'user',
       children: [
         {
-          path: 'useraddorupdate',
+          path: 'user-add-update',
           element: <AddUser />
         },
       ]

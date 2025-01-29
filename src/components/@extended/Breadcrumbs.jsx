@@ -58,7 +58,6 @@ export default function Breadcrumbs({ navigation, title, ...others }) {
     );
   }
 
-  // items
   if (item && item.type === 'item') {
     itemTitle = item.title;
     itemContent = (
@@ -109,4 +108,4 @@ Breadcrumbs.propTypes = {
   titleBottom: PropTypes.bool,
   sx: PropTypes.any,
   others: PropTypes.any
-};
+}

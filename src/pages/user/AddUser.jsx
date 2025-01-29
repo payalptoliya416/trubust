@@ -21,20 +21,44 @@ export default function AddUser() {
             designation: "",
             profile_picture: "",
           });
-   useEffect(() => {
-        if (EditRowData) {
-            setFormData({
-                userID:EditRowData.id || 0,
+
+       useEffect(() => {
+          if (EditRowData) {
+      
+              const convertImageUrlToBase64 = async (imageUrl) => {
+                  const response = await fetch(imageUrl);
+                  const blob = await response.blob();
+                  const reader = new FileReader();
+                  
+                  return new Promise((resolve, reject) => {
+                      reader.onloadend = () => resolve(reader.result); 
+                      reader.onerror = reject; 
+                      reader.readAsDataURL(blob);
+                  });
+              };
+      
+              const fetchLogoBase64 = async () => {
+                      try {
+                          const base64Logo = await convertImageUrlToBase64(EditRowData.profile_picture);
+                          setFormData({
+                             userID:EditRowData.id || 0,
                 companyId: EditRowData.company_id || "",
                 name: EditRowData.name || "",
                 email: EditRowData.email || "",
                 phone: EditRowData.phone || "",
                 department: EditRowData.department || "",
                 designation: EditRowData.designation || "",
-                profile_picture: EditRowData.profile_picture || "",
-            });
-        }
-    }, [EditRowData]);
+                profile_picture: base64Logo || "",
+                          });
+                      } catch (error) {
+                          console.error('Error converting image to Base64:', error);
+                      }
+              };
+      
+              fetchLogoBase64(); // Call the async function to handle the logo
+          }
+      }, [EditRowData]);
+      
      const [errors, setErrors] = useState({});
      const [companies, setCompanies] = useState([]);
 
@@ -84,7 +108,6 @@ export default function AddUser() {
                 if (!formData.email) newErrors.email = "Email is required";
                 if (!formData.phone) newErrors.phone = "Phone is required.";
                 if (!formData.department) newErrors.department = "Department is required";
-                if (!formData.profile_picture) newErrors.profile_picture = "Profile Picture is required";
                 if (!formData.designation) newErrors.designation = "designation is required";
                 
                 return newErrors;
@@ -125,7 +148,7 @@ export default function AddUser() {
   return (
     <>
         <div style={{marginBottom:"20px" , textAlign: "end"}}>
-    <Link to='/user'>  <Button variant="contained">Back</Button></Link>
+    <Link to='/user'>  <Button variant="contained" style={{padding :"4px 23px"}}>Back</Button></Link>
     </div>
     <div className="bg-white shadow-md p-4">
       <div className="flex justify-between items-center mb-5">
@@ -199,7 +222,7 @@ export default function AddUser() {
                 <div style={{ marginTop: '8px' }}>
                 <img
                     src={formData["profile_picture"]} 
-                    alt="profile_picture"
+                    alt="profile"
                     style={{
                     width: "36px",
                     height: "36px",

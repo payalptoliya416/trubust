@@ -149,7 +149,7 @@ const navigate = useNavigate();
   return (
     <>
         <div style={{marginBottom:"20px" , textAlign: "end"}}>
-    <Link to='/admin'>  <Button variant="contained">Back</Button></Link>
+    <Link to='/admin'>  <Button variant="contained" style={{padding :"4px 23px"}}>Back</Button></Link>
     </div>
 
     <div className="bg-white shadow-md p-4">

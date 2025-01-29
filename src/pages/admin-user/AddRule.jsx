@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Button from '@mui/material/Button';
-import { FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import { toast, ToastContainer } from 'react-toastify';
-import { AdminEditPost, adminUserAdd, adminUsers, fetchData, fetchEditShow, fetchRoleEdit, fetchRoleList, RoleAdd, roleEditRole } from 'api/Data';
+import { TextField } from '@mui/material';
+import {fetchRoleEdit, fetchRoleList, RoleAdd, roleEditRole } from 'api/Data';
 
 export default function AddRule() {
     const location = useLocation();
@@ -66,7 +65,7 @@ export default function AddRule() {
   return (
     <>
       <div style={{marginBottom:"20px" , textAlign: "end"}}>
-    <Link to='/role-permission'>  <Button variant="contained">Back</Button></Link>
+    <Link to='/role-permission'>  <Button variant="contained" style={{padding :"4px 23px"}}>Back</Button></Link>
     </div>
     <div className="bg-white shadow-md p-4">
       <div className="flex justify-between items-center mb-5">
@@ -74,7 +73,6 @@ export default function AddRule() {
           {EditRowData  ? "Edit User" : "Add User"}
         </h2>
       </div>
-      <ToastContainer/>
       <form onSubmit={handleFormSubmit}>
         <Grid container spacing={3}>
 

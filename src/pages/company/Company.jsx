@@ -92,7 +92,7 @@ export default function Company() {
 
 
   const handleEditClick = (rowData) => {
-    navigate('/company/addcompany', { state: { rowData } });
+    navigate('/company/company-add-update', { state: { rowData } });
 };
 
   const handleDelete = async (rowData) => {
@@ -148,7 +148,7 @@ export default function Company() {
 <>
 {permissions.create === 1 &&
     <div style={{marginBottom:"20px" , textAlign: "end"}}>
-    <Link to='/company/addcompany'>  <Button variant="contained">+ Add Company</Button></Link>
+    <Link to='/company/company-add-update'>  <Button variant="contained">+ Add Company</Button></Link>
     </div> }
     <div style={{ marginBottom: "16px" }}>
   <Grid container spacing={2}>

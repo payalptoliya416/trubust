@@ -109,7 +109,7 @@ export default function UserComponent() {
         }
       };
       const handleEditClick = (rowData) => {
-        navigate('/user/useraddorupdate', { state: { rowData } });
+        navigate('/user/user-add-update', { state: { rowData } });
     };
     const [searchTerm, setSearchTerm] = React.useState({
         name:'',
@@ -149,7 +149,7 @@ export default function UserComponent() {
       <>
       { permissions.create === 1 &&(
        <div style={{marginBottom:"20px" , textAlign: "end"}}>
-    <Link to='/user/useraddorupdate'>  <Button variant="contained">+ Add User</Button></Link>
+    <Link to='/user/user-add-update'>  <Button variant="contained">+ Add User</Button></Link>
     </div>)}
     <ToastContainer/>
     <div style={{ marginBottom: "16px" }}>
