@@ -196,7 +196,7 @@ export default function ComponentTypography() {
             </MainCard>
             <MainCard title="Link">
               <Stack spacing={1.5}>
-                <Link href="#">www.mantis.com</Link>
+                <Link href="javascript:void(0)">www.mantis.com</Link>
                 <Breadcrumbs aria-label="breadcrumb">
                   <Typography variant="h6">Size: 12px</Typography>
                   <Typography variant="h6">Weight: Regular</Typography>
