@@ -11,6 +11,7 @@ import TableRow from '@mui/material/TableRow';
 import { useNavigate } from 'react-router';
 import { fetchApproveORDecline, fetchRequstList } from 'api/Data';
 import { BsFillChatDotsFill } from "react-icons/bs";
+import { toast, ToastContainer } from 'react-toastify';
 
 const columns = [
     {
@@ -224,12 +225,13 @@ export default function ExternalRequest() {
           const handleChat = (row)=>{
             navigate('/external-request/external-request-chat' ,{ state: { row } })
           }
-
+         const [visible , setVisible] = React.useState(false);
           const handleApprove = async (id, status) => {
                       const response = await fetchApproveORDecline(id, status);
                       if (response.success === true) {
                           const message = response.data.message;
-                        toast.success(message);
+                          toast.success(message);
+                          setVisible(true);
                       } else {
                         toast.error("Failed to approve request");
                       }
@@ -240,6 +242,7 @@ export default function ExternalRequest() {
                       if (response.success === true) {
                         const message = response.data.message;
                         toast.success(message);
+                        setVisible(true);
                       } else {
                         toast.error("Failed to Decline request");
                       }
@@ -248,6 +251,7 @@ export default function ExternalRequest() {
     <>
      {permissions.menu === 1 &&(
      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+     <ToastContainer/>
   <TableContainer sx={{ maxHeight: 580 }}>
     <Table stickyHeader aria-label="sticky table">
       <TableHead>
@@ -337,6 +341,8 @@ export default function ExternalRequest() {
                         fontWeight: "500",
                         marginRight: "8px",
                         border: "transparent",
+                        cursor:"pointer",
+                        display: `${visible ? "none":""}`
                         }}
                         onClick={() => handleApprove(row.id, 1)}
                     >
@@ -352,6 +358,8 @@ export default function ExternalRequest() {
                         fontWeight: "500",
                         marginRight: "12px",
                         border: "transparent",
+                        cursor:"pointer",
+                        display: `${visible ? "none":""}`
                         }}
                         onClick={() => handleDecline(row.id, 2)}
                     >

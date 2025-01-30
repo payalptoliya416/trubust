@@ -3,10 +3,12 @@ import { lazy } from 'react';
 // project import
 import Loadable from 'components/Loadable';
 import Dashboard from 'layout/Dashboard';
+import ProtectedRoute from './ProtectedRoute';
+import NotFound from 'pages/404/NotFound';
 
-const Color = Loadable(lazy(() => import('pages/component-overview/color')));
-const Typography = Loadable(lazy(() => import('pages/component-overview/typography')));
-const Shadow = Loadable(lazy(() => import('pages/component-overview/shadows')));
+// const Color = Loadable(lazy(() => import('pages/component-overview/color')));
+// const Typography = Loadable(lazy(() => import('pages/component-overview/typography')));
+// const Shadow = Loadable(lazy(() => import('pages/component-overview/shadows')));
 const Company = Loadable(lazy(() => import('pages/company/Company')));
 const SingleCompanyView = Loadable(lazy(() => import('pages/company/SingleCompanyView')));
 const EditCompany = Loadable(lazy(() => import('pages/company/EditCompany')));
@@ -28,163 +30,148 @@ const AddPermission = Loadable(lazy(() => import('pages/admin-user/AddPermission
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
 
 // render - sample page
-const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
+// const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
   path: '/',
-  element: <Dashboard />,
+  element: <ProtectedRoute  />,
   id: 'group-dashboard',
   title: 'Navigation',
   type: 'group',
   children: [
     {
       path: '/',
-      element: <DashboardDefault />,
-    },
-    {
-      path: '*',
-      element: <DashboardDefault />
-    },
-    {
-      path: 'color',
-      element: <Color />
-    },
-    {
-      path: 'sample-page',
-      element: <SamplePage />
-    },
-    {
-      path: 'shadow',
-      element: <Shadow />
-    },
-    {
-      path: 'company',
-      element: <Company />
-    },
-    
-    {
-      path: 'company',
+      element: <Dashboard />,
       children: [
         {
-          path: 'company-add-update',
-          element: <EditCompany />,
-         
-
+          path: '/',
+          element: <DashboardDefault />,
         },
-      ]
-    },
-   
-    {
-      path: 'company',
-      children: [
         {
-          path: 'signleCompany',
-          element: <SingleCompanyView />
+          path: '/*',
+          element: <NotFound />
         },
-      ]
-    },
-    {
-      path: 'user',
-      element: <UserComponent />
-    },
-    
-    {
-      path: 'user',
-      children: [
         {
-          path: 'user-add-update',
-          element: <AddUser />
+          path: 'company',
+          element: <Company />
         },
-      ]
-    },
-    {
-      path: 'support-ticket',
-      element: <SupportTicket />
-    },
-    {
-      path: 'support-ticket',
-      children: [
         {
-          path: 'support-ticket-chat',
-          element:  <SupportTicketChat />
-        }
-      ]
-    },
-     {
-      path: 'external-request',
-      element: <ExternalRequest />
-    },
-    {
-      path: 'external-request',
-      children: [
-        {
-          path: 'external-request-chat',
-          element:  <ExternalRequestChat />
-        }
-      ]
-    },
-    {
-      path: 'internal-request',
-      element: <InternalRequest />
-    },
-    {
-      path: 'secure-channel',
-      element: <SecureChannel />
-    },
-    {
-      path: 'role-permission',
-      element: <RolePermission />
-    },
-    {
-      path: 'role-permission',
-      children: [
-        {
-          path: 'add-rolename',
-          element:  <AddRule />
-        }
-      ]
-    },
-    {
-      path: 'admin',
-      element: <Admin />
-    },
-    {
-      path: 'admin',
-      children: [
-        {
-          path: 'add-user',
-          element:  <AddAdmin />
-        }
-      ]
-    },
-    {
-      path: 'logs',
-      element: <Logs />
-    },
-    {
-      path: 'logs',
-      children: [
-        {
-          path: 'error-logs',
-          element: <ErrorLogs />
+          path: 'company',
+          children: [
+            {
+              path: 'company-add-update',
+              element: <EditCompany />,    
+            },
+          ]
         },
-      ]
-    },   
-    {
-      path: 'role-permission',
-      children: [
         {
-          path: 'add-role-permission',
-          element: <AddPermission />
+          path: 'company',
+          children: [
+            {
+              path: 'signleCompany',
+              element: <SingleCompanyView />
+            },
+          ]
         },
+        {
+          path: 'user',
+          element: <UserComponent />
+        },
+        {
+          path: 'user',
+          children: [
+            {
+              path: 'user-add-update',
+              element: <AddUser />
+            },
+          ]
+        },
+        {
+          path: 'support-ticket',
+          element: <SupportTicket />
+        },
+        {
+          path: 'support-ticket',
+          children: [
+            {
+              path: 'support-ticket-chat',
+              element:  <SupportTicketChat />
+            }
+          ]
+        },
+         {
+          path: 'external-request',
+          element: <ExternalRequest />
+        },
+        {
+          path: 'external-request',
+          children: [
+            {
+              path: 'external-request-chat',
+              element:  <ExternalRequestChat />
+            }
+          ]
+        },
+        {
+          path: 'internal-request',
+          element: <InternalRequest />
+        },
+        {
+          path: 'secure-channel',
+          element: <SecureChannel />
+        },
+        {
+          path: 'role-permission',
+          element: <RolePermission />
+        },
+        {
+          path: 'role-permission',
+          children: [
+            {
+              path: 'add-rolename',
+              element:  <AddRule />
+            }
+          ]
+        },
+        {
+          path: 'admin',
+          element: <Admin />
+        },
+        {
+          path: 'admin',
+          children: [
+            {
+              path: 'add-user',
+              element:  <AddAdmin />
+            }
+          ]
+        },
+        {
+          path: 'logs',
+          element: <Logs />
+        },
+        {
+          path: 'logs',
+          children: [
+            {
+              path: 'error-logs',
+              element: <ErrorLogs />
+            },
+          ]
+        },   
+        {
+          path: 'role-permission',
+          children: [
+            {
+              path: 'add-role-permission',
+              element: <AddPermission />
+            },
+          ]
+        },   
       ]
-    },   
-    {
-      path: 'typography',
-      element: <Typography />
-    },
+    }
     
   ]
 };

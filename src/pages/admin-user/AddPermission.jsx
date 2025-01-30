@@ -88,7 +88,6 @@ function AddPermission() {
       </Box>
 
       <Box sx={{ px: 3, pb: 3 }}>
-
         <form onSubmit={PermissionSubmit}>
           {loading ? (
             <Typography variant="body1" align="center">
@@ -96,7 +95,7 @@ function AddPermission() {
             </Typography>
           ) : (
             <Paper sx={{ p: 2 }}>
-              <Grid container spacing={2}>
+              <Grid container spacing={1}>
                 {data
                   .filter(
                     (itemData) =>
@@ -104,9 +103,9 @@ function AddPermission() {
                   )
                   .map((itemData) => (
                     <Grid item xs={12} key={itemData.id}>
-                      <Grid container alignItems="center" spacing={3}>
-                        <Grid item xs={3}>
-                          <Typography variant="body2" sx={{ color: '#6f6b7d' }}>
+                      <Grid container alignItems="center" spacing={1}>
+                        <Grid item xs={12} sm={3}>
+                          <Typography variant="body1" sx={{ color: '#6f6b7d' }}>
                             {
                               {
                                 analytics: 'Analytics',
@@ -121,7 +120,7 @@ function AddPermission() {
                         <Grid item xs={9}>
                           <Grid container justifyContent="space-between">
                             {['menu', 'create', 'edit', 'delete'].map((action) => (
-                              <Grid item key={action}>
+                              <Grid item key={action} xs={6} sm={6} md={3}>
                                 <FormControlLabel
                                   control={
                                     <Checkbox

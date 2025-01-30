@@ -28,7 +28,6 @@ export default function EditCompany() {
 
     //   useEffect(() => {
     //     if (EditRowData) {
-    //       console.log("EditRowData",reader.readAsDataURL(EditRowData.companyLogo)),
           
     //         setFormData({
     //             companyID:EditRowData.id || 0,

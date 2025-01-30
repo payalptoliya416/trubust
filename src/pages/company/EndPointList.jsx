@@ -117,9 +117,13 @@ export default function EndPointList() {
                 .map((row) => (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.id}>
                     {columns.map((column) => {
-                      if (column.id === "percentageExternalRequest" && column.cellRenderer) {
-                        return column.cellRenderer({ value: row[column.id] });
-                      }
+                       if (column.id === "percentageExternalRequest") {
+                                  return (
+                                    <TableCell key={column.id} align="left">
+                                      {column.cellRenderer({ value: row[column.id] })}
+                                    </TableCell>
+                                  );
+                                }
                       return (
                         <TableCell key={column.id} align="left">
                           {row[column.id]}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Box, TextField, IconButton, Typography, Avatar, Paper, Stack, Container ,InputAdornment, Card,  useTheme, ThemeProvider,CssBaseline,useMediaQuery,Drawer,Toolbar, CircularProgress} from "@mui/material";
 import { display, fontSize, styled } from "@mui/system";
 import { IoSearch, IoSend, IoMenu,  } from "react-icons/io5";
@@ -82,7 +82,11 @@ const SecureChannel = () => {
      const [selectedImage , setSelectedImage] = useState(null);
   const loginCompanyID =  JSON.parse(localStorage.getItem('logindetail')) || [];
   const ID = loginCompanyID.companyID
-
+  function ScrollToBottom(){
+    const elementRef = useRef();
+    useEffect(() => elementRef.current.scrollIntoView());
+    return <div ref={elementRef} />;
+  };
   useEffect(() => {
     const socket = io('https://server.truebust.com'); 
     const event =`new_reply_group_chat_${companyIDD}`
@@ -293,7 +297,7 @@ const handleMobileOpen = () =>{
                 onClick={handleMobileOpen}
                 sx={{ mr: 2 }}
               >
-                <IoMenu />
+                <IoMenu style={{fontSize:"30px"}}/>
               </IconButton>
           </Toolbar>
             )}
@@ -414,6 +418,7 @@ const handleMobileOpen = () =>{
                 </Box>
                 </MessageContainer>
               )})}
+              <ScrollToBottom dependency={list} />
             </Box>
            <InputArea>
              <Box
@@ -504,9 +509,10 @@ const handleMobileOpen = () =>{
               </>
             ):(
               <>
-            {loading ? <div style={{display: "flex" , justifyContent:"center", alignItems: "center" , height:"100%" , width:"100%"}}><CircularProgress /></div>:
-              <Box style={{height: "100%", width: "100%", display:"flex", justifyContent: "center" , alignItems:"center"}}>
+            {loading ? <div style={{display: "flex" , justifyContent:"center", alignItems: "center" , height:"100%" , width:"100%"  }}><CircularProgress /></div>:
+              <Box style={{height: "100%", width: "100%", display:"flex", justifyContent: "center" , alignItems:"center" , flexDirection:"column"}}>
               <HiMiniUsers  style={{fontSize: "80px"}}/>
+              <Typography> Start Conversation</Typography>
               </Box>
             }
               </>

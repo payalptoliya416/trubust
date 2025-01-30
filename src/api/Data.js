@@ -486,6 +486,7 @@ export const fetchApproveORDecline = async (id, status) => {
     });
 
     const data = await response.json();
+
     if (response.ok) {
       return { success: true, data };
     } else {

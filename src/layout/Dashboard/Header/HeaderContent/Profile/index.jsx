@@ -26,10 +26,10 @@ import Transitions from 'components/@extended/Transitions';
 
 // assets
 import LogoutOutlined from '@ant-design/icons/LogoutOutlined';
-import SettingOutlined from '@ant-design/icons/SettingOutlined';
-import UserOutlined from '@ant-design/icons/UserOutlined';
 import avatar1 from 'assets/images/img/user.png';
 import { useNavigate } from 'react-router';
+import { UserOutlined } from '@ant-design/icons';
+import { removeAuthTokenFromLocalStorage } from 'api/Data';
 
 // tab panel wrapper
 function TabPanel({ children, value, index, ...other }) {
@@ -74,7 +74,7 @@ export default function Profile() {
   const iconBackColorOpen = 'grey.100';
   
   const handleLogOut = ()=>{
-    removeAuthTokenFromLocalStorage();
+    removeAuthTokenFromLocalStorage ();
     navigate('/login')
   }
   return (
@@ -138,7 +138,7 @@ export default function Profile() {
                       <div></div>
                         <Tooltip title="Logout" >
                           <IconButton size="large" sx={{ color: 'text.primary' }} >
-                            <LogoutOutlined />
+                            <LogoutOutlined onClick={handleLogOut}/>
                           </IconButton>
                         </Tooltip>
                       </Grid>
@@ -159,18 +159,6 @@ export default function Profile() {
                         label="Profile"
                         {...a11yProps(0)}
                       />
-                      {/* <Tab
-                        sx={{
-                          display: 'flex',
-                          flexDirection: 'row',
-                          justifyContent: 'center',
-                          alignItems: 'center',
-                          textTransform: 'capitalize'
-                        }}
-                        icon={<SettingOutlined style={{ marginBottom: 0, marginRight: '10px' }} />}
-                        label="Setting"
-                        {...a11yProps(1)}
-                      /> */}
                     </Tabs>
                   </Box>
                   <TabPanel value={value} index={0} dir={theme.direction}>

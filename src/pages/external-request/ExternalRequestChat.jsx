@@ -56,7 +56,11 @@ export default function ExternalRequestChat() {
     const currentID = location.state?.row.id;
     const requestID = location.state?.row.requestID;
     const currentStatus = location.state?.row.status;
-
+ function ScrollToBottom(){
+    const elementRef = useRef();
+    useEffect(() => elementRef.current.scrollIntoView());
+    return <div ref={elementRef} />;
+  };
     const socketRef = useRef();
   useEffect(() => {
     if (socketRef.current) {
@@ -158,12 +162,13 @@ export default function ExternalRequestChat() {
           const handleCancelImage = () => {
             setSelectedImage(null); 
           };
-
+  const [visible , setVisible] = React.useState(false);
           const handleApprove = async (id, status) => {
             const response = await fetchApproveORDecline(id, status);
             if (response.success === true) {
                 const message = response.data.message;
               toast.success(message);
+              setVisible(true);
             } else {
               toast.error("Failed to approve request");
             }
@@ -174,6 +179,7 @@ export default function ExternalRequestChat() {
             if (response.success === true) {
               const message = response.data.message;
               toast.success(message);
+              setVisible(true);
             } else {
               toast.error("Failed to Decline request");
             }
@@ -186,21 +192,18 @@ export default function ExternalRequestChat() {
             <ToastContainer/> 
     <Box
       display="flex"
-      justifyContent="space-between"
+      justifyContent="end"
       alignItems="center"
       position="sticky"
-      top="14%"
       width="100%"
-      bgcolor="grey.100"
+      gap='6px'
       p={1}
       borderRadius="4px 4px 0 0"
-      boxShadow={1}
-      marginBottom='25px'
+      marginBottom='20px'
     >
-   <div>
-    <Link to='/external-request'>  <Button variant="contained" style={{padding :"4px 23px"}}>Back</Button></Link>
-    </div>
-
+     <div style={{ textAlign: "end"}}>
+    <Link to='/external-request'>  <Button variant="contained" style={{padding :"3px 23px"}}>Back</Button></Link>
+     </div>
       <Box>
         {currentStatus === 0 && (
           <>
@@ -208,7 +211,7 @@ export default function ExternalRequestChat() {
               variant="contained"
               color="success"
               size="small"
-              sx={{ mr: 1, fontWeight: "bold" }}
+              sx={{ mr: '6px', fontWeight: "bold" , display: `${visible ? "none":""}` }}
               onClick={() => handleApprove(currentID, 1)}
             >
               Approve
@@ -217,7 +220,7 @@ export default function ExternalRequestChat() {
               variant="contained"
               color="error"
               size="small"
-              sx={{ fontWeight: "bold" }}
+              sx={{ fontWeight: "bold" , display: `${visible ? "none":""}` }}
               onClick={() => handleDecline(currentID, 2)}
             >
               Decline
@@ -233,16 +236,16 @@ export default function ExternalRequestChat() {
     const createdDate = new Date(msg.created_at);
     const formattedDate = !isNaN(createdDate.getTime())
       ? createdDate.toLocaleString("en-US", {
-          month: "long",
           day: "numeric",
+          month: "long",
           year: "numeric",
           hour: "2-digit",
           minute: "2-digit",
           hour12: true,
         })
       : new Date().toLocaleString("en-US", {
-          month: "long",
           day: "numeric",
+          month: "long",
           year: "numeric",
           hour: "2-digit",
           minute: "2-digit",
@@ -303,6 +306,7 @@ export default function ExternalRequestChat() {
             color={
               msg.type === "User" ? "text.secondary" : "rgba(255,255,255,0.7)"
             }
+            marginTop={1}
           >
             {formattedDate}
           </Typography>
@@ -310,6 +314,7 @@ export default function ExternalRequestChat() {
       </Box>
     );
   })}
+  <ScrollToBottom dependency={comments} />
 </MessagesArea>
 
 <InputArea>

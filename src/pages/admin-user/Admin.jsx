@@ -19,7 +19,7 @@ const columns = [
       label: "SR No.", 
       minWidth: 170,
     },
-    { id: "name", label: "Name", minWidth: 100 },
+    { id: "name", label: "Name", minWidth: 170 },
     { id: "role_name", label: "ROLE NAME", minWidth: 170 },
     { id: "companyname", label: "COMAPANY NAME", minWidth: 170 },
     { id: "email", label: "EMAIL", minWidth: 170 },

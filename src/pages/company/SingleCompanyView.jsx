@@ -32,98 +32,85 @@ export default function SingleCompanyView() {
       </div>
       <Grid container spacing={2} mb={4}>
   <Grid item xs={12} lg={6}>
-  <Card 
-  sx={{ 
-    textAlign: 'center', 
-    padding: 1, 
-    borderRadius: 2, 
-    boxShadow: 3, 
-    margin: '0 auto' 
-  }}
->
-  <CardMedia
-    component="img"
+  <h3>Company Information</h3>
+    <Card 
     sx={{ 
-      width: 70, 
-      height: 70, 
-      borderRadius: '50%', 
-      margin: '0 auto', 
-      backgroundColor: 'rgba(115, 103, 240, 0.25)', 
-      objectFit: '100% 100%' 
+      textAlign: 'center', 
+      padding: 1, 
+      borderRadius: 2, 
+      margin: '0 auto' 
     }}
-    image={singleCompnay.companyLogo}
-    alt={`logo`}
-  />
-
-  <CardContent>
-    <Typography 
-      variant="h5" 
-      component="h3" 
+  > 
+  <div style={{backgroundColor:"#E6F4FF" , padding:"20px 0"}}>
+    <CardMedia
+      component="img"
       sx={{ 
-        color: '#7367F0', 
-        fontWeight: 'bold', 
-        marginTop: 1 
+        width: 70, 
+        height: 70, 
+        borderRadius: '50%', 
+        margin: '0 auto', 
+        backgroundColor: 'rgba(115, 103, 240, 0.25)', 
+        objectFit: '100% 100%' ,
       }}
-    >
-      {singleCompnay.name}
-    </Typography>
+      image={singleCompnay.companyLogo}
+      alt={`logo`}  
+    />
     <Typography 
-      variant="body1" 
-      sx={{ 
-        color: '#2f2d3dc7', 
-        marginTop: 1, 
-        marginBottom: 3 
-      }}
-    >
-      {singleCompnay.description || ''}
-    </Typography>
+        variant="h5" 
+        component="h3" 
+        sx={{ 
+          color: '#7367F0', 
+          fontWeight: 'bold', 
+          padding:"10px 0 0 0"
+        }}
+      >
+        {singleCompnay.name}
+      </Typography>
+  </div>
+    <CardContent>
+      <Box sx={{ textAlign: 'left', marginBottom: 3 }}>
+        <Typography variant="body1" sx={{ marginBottom: 1 , display:"flex", justifyContent: { xs: "flex-start", sm: "space-between" } , alignItems:"center" , flexWrap: {xs: "wrap"} , gap:"3px"}}>
+          <strong>Total Employers:</strong> {singleCompnay.totalEmployers}
+        </Typography>
+        <Typography variant="body1" sx={{ marginBottom: 1 , display:"flex", justifyContent: { xs: "flex-start", sm: "space-between" } , alignItems:"center" , flexWrap: {xs: "wrap"} , gap:"3px" }}>
+          <strong>Company Locations:</strong> {singleCompnay.companyLocations}
+        </Typography>
+        <Typography variant="body1" sx={{ marginBottom: 1 , display:"flex", justifyContent: { xs: "flex-start", sm: "space-between" } , alignItems:"center" , flexWrap: {xs: "wrap"} , gap:"3px" }}>
+          <strong>Business Activity:</strong> {singleCompnay.bussinessActivity}
+        </Typography>
+        <Typography variant="body1" sx={{ marginBottom: 1 , display:"flex", justifyContent: { xs: "flex-start", sm: "space-between" } , alignItems:"center" , flexWrap: {xs: "wrap"} , gap:"3px" }}>
+          <strong>Clients:</strong> {singleCompnay.clients}
+        </Typography>
+        <Typography variant="body1" sx={{ marginBottom: 1 , display:"flex", justifyContent: { xs: "flex-start", sm: "space-between" } , alignItems:"center" , flexWrap: {xs: "wrap"} , gap:"3px" }}>
+          <strong>Value of Service/Product:</strong> {singleCompnay.serviceAndProduct}
+        </Typography>
+        <Typography variant="body1" sx={{ marginBottom: 1 , display:"flex", justifyContent: { xs: "flex-start", sm: "space-between" } , alignItems:"center" , flexWrap: {xs: "wrap"} , gap:"3px" }}>
+          <strong>Providers:</strong> {singleCompnay.providers}
+        </Typography>
+        <Typography variant="body1" sx={{ marginBottom: 1 , display:"flex", justifyContent: { xs: "flex-start", sm: "space-between" } , alignItems:"center" , flexWrap: {xs: "wrap"} , gap:"3px" }}>
+          <strong>Reporting Officer:</strong> {singleCompnay.reportingOfficer}
+        </Typography>
+        <Typography variant="body1" sx={{ marginBottom: 1 , display:"flex", justifyContent: { xs: "flex-start", sm: "space-between" } , alignItems:"center" , flexWrap: {xs: "wrap"} , gap:"3px" }}>
+          <strong>MSP:</strong> {singleCompnay.msp}
+        </Typography>
+      </Box>
 
-    <Typography variant="h6" sx={{ textAlign: 'left', fontWeight: 'bold', marginBottom: 1 }}>
-      Company Details
-    </Typography>
-    <Box sx={{ textAlign: 'left', marginBottom: 3 }}>
-      <Typography variant="body1" sx={{ marginBottom: 1 }}>
-        <strong>Total Employers:</strong> {singleCompnay.totalEmployers}
+      <Typography variant="h6" sx={{ textAlign: 'left', fontWeight: 'bold', marginBottom: 1 , display:"flex", justifyContent: { xs: "flex-start", sm: "space-between" } , alignItems:"center" , flexWrap: {xs: "wrap"} , gap:"3px" }}>
+        Risk Info
       </Typography>
-      <Typography variant="body1" sx={{ marginBottom: 1 }}>
-        <strong>Company Locations:</strong> {singleCompnay.companyLocations}
-      </Typography>
-      <Typography variant="body1" sx={{ marginBottom: 1 }}>
-        <strong>Business Activity:</strong> {singleCompnay.bussinessActivity}
-      </Typography>
-      <Typography variant="body1" sx={{ marginBottom: 1 }}>
-        <strong>Clients:</strong> {singleCompnay.clients}
-      </Typography>
-      <Typography variant="body1" sx={{ marginBottom: 1 }}>
-        <strong>Value of Service/Product:</strong> {singleCompnay.serviceAndProduct}
-      </Typography>
-      <Typography variant="body1" sx={{ marginBottom: 1 }}>
-        <strong>Providers:</strong> {singleCompnay.providers}
-      </Typography>
-      <Typography variant="body1" sx={{ marginBottom: 1 }}>
-        <strong>Reporting Officer:</strong> {singleCompnay.reportingOfficer}
-      </Typography>
-      <Typography variant="body1" sx={{ marginBottom: 1 }}>
-        <strong>MSP:</strong> {singleCompnay.msp}
-      </Typography>
-    </Box>
-
-    <Typography variant="h6" sx={{ textAlign: 'left', fontWeight: 'bold', marginBottom: 1 }}>
-      Risk Info
-    </Typography>
-    <Box sx={{ textAlign: 'left' }}>
-      <Typography variant="body1" sx={{ marginBottom: 1 }}>
-        <strong>Previous Attacks:</strong> {singleCompnay.previosAttacks}
-      </Typography>
-      <Typography variant="body1" sx={{ marginBottom: 1 }}>
-        <strong>Security Assets:</strong> {singleCompnay.securityAssets}
-      </Typography>
-      <Typography variant="body1" sx={{ marginBottom: 1 }}>
-        <strong>Most Used Platforms:</strong> {singleCompnay.mostUsedPlatforms}
-      </Typography>
-    </Box>
-  </CardContent>
-</Card>
+      <Box sx={{ textAlign: 'left' }}>
+        <Typography variant="body1" sx={{ marginBottom: 1 , display:"flex", justifyContent: { xs: "flex-start", sm: "space-between" } , alignItems:"center" , flexWrap: {xs: "wrap"} , gap:"3px" }}>
+          <strong>Previous Attacks:</strong> {singleCompnay.previosAttacks}
+        </Typography>
+        <Typography variant="body1" sx={{ marginBottom: 1 , display:"flex", justifyContent: { xs: "flex-start", sm: "space-between" } , alignItems:"center" , flexWrap: {xs: "wrap"} , gap:"3px" }}>
+          <strong>Security Assets:</strong> {singleCompnay.securityAssets}
+        </Typography>
+        <Typography variant="body1" sx={{ marginBottom: 1 , display:"flex", justifyContent: { xs: "flex-start", sm: "space-between" } , alignItems:"center" , flexWrap: {xs: "wrap"} , gap:"3px" }}>
+          <strong>Most Used Platforms:</strong> {singleCompnay.mostUsedPlatforms}
+        </Typography>
+      </Box>
+    </CardContent>
+  </Card>
   </Grid>
   <Grid item xs={12} lg={6}>
   <EndPointList/>

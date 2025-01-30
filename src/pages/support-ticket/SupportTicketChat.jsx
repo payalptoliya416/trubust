@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Box, TextField, IconButton, Typography, Avatar, Paper, Stack, CircularProgress } from "@mui/material";
 import { styled } from "@mui/system";
 import { IoSend } from "react-icons/io5";
@@ -54,7 +54,11 @@ export default function SupportTicketChat() {
   const ticketID = location.state?.row.receiverID;
   const senderId = location.state?.row.senderID;
   const companyId = location.state?.row.companyID;
-
+  function ScrollToBottom(){
+    const elementRef = useRef();
+    useEffect(() => elementRef.current.scrollIntoView());
+    return <div ref={elementRef} />;
+  };
   useEffect(() => {
     const socket = io("https://server.truebust.com", {
       reconnection: true, 
@@ -245,6 +249,7 @@ export default function SupportTicketChat() {
       </Box>
     );
   })}
+  <ScrollToBottom dependency={comments} />
 </MessagesArea>
 
 <InputArea>

@@ -20,10 +20,10 @@ const columns = [
       label: "Company Name", 
       minWidth: 170,
     },
-    { id: "name", label: "Name", minWidth: 100 },
+    { id: "name", label: "Name", minWidth: 170 },
     { id: "email", label: "Email", minWidth: 170 },
     { id: "phone", label: "Phone", minWidth: 170 },
-    { id: "action", label: "Actions", minWidth: 170 },
+    { id: "action", label: "Actions", minWidth: 260 },
   ];
 
 export default function UserComponent() {

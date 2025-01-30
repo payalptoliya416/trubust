@@ -1,53 +1,17 @@
 // material-ui
-import Avatar from '@mui/material/Avatar';
-import AvatarGroup from '@mui/material/AvatarGroup';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
-import List from '@mui/material/List';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemSecondaryAction from '@mui/material/ListItemSecondaryAction';
-import ListItemText from '@mui/material/ListItemText';
-import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-
+import { CiCreditCard1 } from "react-icons/ci";
+import { BsDiagram2 } from "react-icons/bs";
 // project import
 import MainCard from 'components/MainCard';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
-import MonthlyBarChart from './MonthlyBarChart';
-import ReportAreaChart from './ReportAreaChart';
 import UniqueVisitorCard from './UniqueVisitorCard';
-import SaleReportCard from './SaleReportCard';
 import OrdersTable from './OrdersTable';
 
-// assets
-import GiftOutlined from '@ant-design/icons/GiftOutlined';
-import MessageOutlined from '@ant-design/icons/MessageOutlined';
-import SettingOutlined from '@ant-design/icons/SettingOutlined';
-import avatar1 from 'assets/images/users/avatar-1.png';
-import avatar2 from 'assets/images/users/avatar-2.png';
-import avatar3 from 'assets/images/users/avatar-3.png';
-import avatar4 from 'assets/images/users/avatar-4.png';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchAnalyticRequest, fetchAnalyticUsers, fetchTotalCompany } from 'api/Data';
 
-// avatar style
-const avatarSX = {
-  width: 36,
-  height: 36,
-  fontSize: '1rem'
-};
-
-// action style
-const actionSX = {
-  mt: 0.75,
-  ml: 1,
-  top: 'auto',
-  right: 'auto',
-  alignSelf: 'flex-start',
-  transform: 'none'
-};
 
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
@@ -125,16 +89,16 @@ try {
           <Typography variant="h5">Dashboard</Typography>
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <AnalyticEcommerce title="Declined Internal Requests" count={`${internal ? internal.declineRequest :""}`} percentage={`${internal ? internal.DeclineRequestsPercentage :""}`} isLoss color="warning" extra="1,943" />
+          <AnalyticEcommerce title="Declined Internal Requests" count={`${internal ? internal.declineRequest :""}`} percentage={`${internal ? internal.DeclineRequestsPercentage :""}`} isLoss color="warning" extra="1,943" icon={<BsDiagram2 style={{ fontSize: "1.25rem", color: "#ea5455" }}/>}  bgcolor='#fce5e6'/>
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <AnalyticEcommerce title="Declined External Requests" count={`${extrenal ? extrenal.declineRequest :""}`} percentage={`${extrenal ? extrenal.DeclineRequestsPercentage :""}`} isLoss color="warning" extra="$20,395" />
+          <AnalyticEcommerce title="Declined External Requests" count={`${extrenal ? extrenal.declineRequest :""}`} percentage={`${extrenal ? extrenal.DeclineRequestsPercentage :""}`} isLoss color="warning" extra="$20,395" icon={<BsDiagram2 style={{ fontSize: "1.25rem", color: "#ea5455" }}/>}  bgcolor='#fce5e6'/>
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <AnalyticEcommerce title="Pending Internal Requests" count={`${internal ? extrenal.pendingRequest :""}`} percentage={`${internal ? internal.pendingRequestsPercentage :""}`} isLoss color="warning" extra="$20,395" />
+          <AnalyticEcommerce title="Pending Internal Requests" count={`${internal ? extrenal.pendingRequest :""}`} percentage={`${internal ? internal.pendingRequestsPercentage :""}`} isLoss color="warning" extra="$20,395"  icon={<BsDiagram2 style={{ fontSize: "1.25rem", color: "#00cfe8" }}/>}  bgcolor='#d9f8fc'/>
         </Grid>
         <Grid item xs={12} sm={6} md={4} lg={3}>
-          <AnalyticEcommerce title=" Pending External Requests" count={`${extrenal ? extrenal.pendingRequest :""}`} percentage={`${extrenal ? extrenal.pendingRequestsPercentage :""}`} isLoss color="warning" extra="$20,395" />
+          <AnalyticEcommerce title=" Pending External Requests" count={`${extrenal ? extrenal.pendingRequest :""}`} percentage={`${extrenal ? extrenal.pendingRequestsPercentage :""}`} isLoss color="warning" extra="$20,395" icon={<BsDiagram2 style={{ fontSize: "1.25rem", color: "#00cfe8" }}/>}  bgcolor='#d9f8fc' />
         </Grid>
         <Grid item xs={12} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
         <Grid item xs={12} md={12} lg={12}>
@@ -142,10 +106,10 @@ try {
         </Grid>
         <Grid item xs={12} sm={12} md={6} lg={6}>
         <Grid item xs={12} sm={12} md={12} lg={12} mt={5}>
-          <AnalyticEcommerce title="Internal Requests sent" count={`${internal ? internal.totalRequest :""}`} percentage='' extra="65,000" />
+          <AnalyticEcommerce title="Internal Requests sent" count={`${internal ? internal.totalRequest :""}`} percentage='' extra="65,000"  icon={<CiCreditCard1 style={{ fontSize: "1.25rem", color: "#28c76f" }}/>} bgcolor='#dff7e9' />
         </Grid>
-        <Grid item xs={12} sm={12} md={12} lg={12} mt={5}>
-          <AnalyticEcommerce title="External Requests sent" count={`${extrenal ? extrenal.totalRequest :""}`} percentage='' extra="8,900" />
+        <Grid item xs={12} sm={12} md={12} lg={12} mt={3}>
+          <AnalyticEcommerce title="External Requests sent" count={`${extrenal ? extrenal.totalRequest :""}`} percentage='' extra="8,900"  icon={<CiCreditCard1 style={{ fontSize: "1.25rem", color: "#28c76f" }}/>} bgcolor='#dff7e9' />
         </Grid>
         </Grid>
         <Grid item xs={12} md={6} lg={6}>

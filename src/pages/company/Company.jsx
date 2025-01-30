@@ -34,7 +34,7 @@ const columns = [
       </div>
     ),
   },
-  { id: "email", label: "Email", minWidth: 100 },
+  { id: "email", label: "Email", minWidth: 170 },
   { id: "companyLocations", label: "Country", minWidth: 170 },
   { id: "action", label: "Actions", minWidth: 170 },
 ];
@@ -230,7 +230,7 @@ export default function Company() {
         if (column.id === "action") {
           return (
             <TableCell key={column.id} align="left">
-              <div style={{ display: "flex", gap: "14px" }}>
+              <div style={{ display: "flex", gap: "14px"}}>
               {permissions.edit === 1 && (
                 <EditOutlined
                   style={{ color: "#52c41a", cursor: "pointer" }}

@@ -10,26 +10,36 @@ import Box from '@mui/material/Box';
 // project import
 import MainCard from 'components/MainCard';
 
-// assets
-import RiseOutlined from '@ant-design/icons/RiseOutlined';
-import FallOutlined from '@ant-design/icons/FallOutlined';
-
-const iconSX = { fontSize: '0.75rem', color: 'inherit', marginLeft: 0, marginRight: 0 };
-
-export default function AnalyticEcommerce({ color = 'primary', title, count, percentage, isLoss }) {
+export default function AnalyticEcommerce({ color = 'primary', title, count, percentage, isLoss ,icon , bgcolor}) {
   return (
     <MainCard contentSX={{ p: 2 }}>
-      <Stack spacing={0.5}>
-        <Typography variant="h6" color="text.secondary">
-          {title}
-        </Typography>
-        <Grid container alignItems="center">
+      <Stack spacing={1}>
+        <Grid container alignItems="center" gap={2} >
+        <Grid>
+        <Box
+            sx={{
+              width: 32,
+              height: 32,
+              borderRadius: "24%",
+              backgroundColor: `${bgcolor}`,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+              {icon}
+          </Box>
+          </Grid>
           <Grid item>
+          
             <Typography variant="h4" color="inherit">
               {count}
             </Typography>
           </Grid>
         </Grid>
+        <Typography variant="h6" color="#000">
+          {title}
+        </Typography>
         <Grid container alignItems="center">
           {percentage && (
             <Grid item>

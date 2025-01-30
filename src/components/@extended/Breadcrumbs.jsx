@@ -10,12 +10,11 @@ import MuiBreadcrumbs from '@mui/material/Breadcrumbs';
 // project import
 import MainCard from 'components/MainCard';
 
-export default function Breadcrumbs({ navigation, title, ...others }) {
+export default function Breadcrumbs({ navigation, title,...others }) {
   const location = useLocation();
   const [main, setMain] = useState();
   const [item, setItem] = useState();
-
-  // set active item state
+  
   const getCollapse = (menu) => {
     if (menu.children) {
       menu.children.filter((collapse) => {
@@ -33,6 +32,8 @@ export default function Breadcrumbs({ navigation, title, ...others }) {
   };
 
   useEffect(() => {
+    setMain(null);
+    setItem(null);
     navigation?.items?.map((menu) => {
       if (menu.type && menu.type === 'group') {
         getCollapse(menu);

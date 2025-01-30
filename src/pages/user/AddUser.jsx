@@ -24,7 +24,6 @@ export default function AddUser() {
 
        useEffect(() => {
           if (EditRowData) {
-      
               const convertImageUrlToBase64 = async (imageUrl) => {
                   const response = await fetch(imageUrl);
                   const blob = await response.blob();
