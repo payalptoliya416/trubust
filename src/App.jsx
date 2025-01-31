@@ -8,26 +8,14 @@ import ScrollTop from 'components/ScrollTop';
 // ==============================|| APP - THEME, ROUTER, LOCAL ||============================== //
 
 export default function App() {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-  const handleResize = () => {
-    setScreenWidth(window.innerWidth);
-  };
-
   useEffect(() => {
-    const resizeListener = () => {
-      handleResize();
-      if (window.innerWidth !== screenWidth) {
-        window.location.reload();
-      }
+    const handleResize = () => {
+      window.location.reload();
     };
-
-    window.addEventListener('resize', resizeListener);
-
-    return () => {
-      window.removeEventListener('resize', resizeListener);
-    };
-  }, [screenWidth]);
+  
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <ThemeCustomization>

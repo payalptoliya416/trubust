@@ -84,16 +84,16 @@ try {
         <Grid item xs={12} sx={{ mb: -2.25 }}>
           <Typography variant="h5">Dashboard</Typography>
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
+        <Grid item xs={12} sm={6} md={6} lg={3}>
           <AnalyticEcommerce title="Declined Internal Requests" count={`${internal ? internal.declineRequest :""}`} percentage={`${internal ? internal.DeclineRequestsPercentage :""}`} isLoss color="warning" extra="1,943" icon={<BsDiagram2 style={{ fontSize: "1.25rem", color: "#ea5455" }}/>}  bgcolor='#fce5e6'/>
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
+        <Grid item xs={12} sm={6} md={6} lg={3}>
           <AnalyticEcommerce title="Declined External Requests" count={`${extrenal ? extrenal.declineRequest :""}`} percentage={`${extrenal ? extrenal.DeclineRequestsPercentage :""}`} isLoss color="warning" extra="$20,395" icon={<BsDiagram2 style={{ fontSize: "1.25rem", color: "#ea5455" }}/>}  bgcolor='#fce5e6'/>
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
+        <Grid item xs={12} sm={6} md={6} lg={3}>
           <AnalyticEcommerce title="Pending Internal Requests" count={`${internal ? extrenal.pendingRequest :""}`} percentage={`${internal ? internal.pendingRequestsPercentage :""}`} isLoss color="warning" extra="$20,395"  icon={<BsDiagram2 style={{ fontSize: "1.25rem", color: "#00cfe8" }}/>}  bgcolor='#d9f8fc'/>
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
+        <Grid item xs={12} sm={6} md={6} lg={3}>
           <AnalyticEcommerce title=" Pending External Requests" count={`${extrenal ? extrenal.pendingRequest :""}`} percentage={`${extrenal ? extrenal.pendingRequestsPercentage :""}`} isLoss color="warning" extra="$20,395" icon={<BsDiagram2 style={{ fontSize: "1.25rem", color: "#00cfe8" }}/>}  bgcolor='#d9f8fc' />
         </Grid>
         <Grid item xs={12} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
