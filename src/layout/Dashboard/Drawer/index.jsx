@@ -50,7 +50,9 @@ export default function MainDrawer({ window }) {
               borderRightColor: 'divider',
               backgroundImage: 'none',
               boxShadow: 'inherit'
-            }
+            },
+            zIndex:`${drawerOpen ? "1200":"1"}`,
+            position:`${drawerOpen ? "fixed":"static"}`
           }}
         >
           {drawerHeader}
