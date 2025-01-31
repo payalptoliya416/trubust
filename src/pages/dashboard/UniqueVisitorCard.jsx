@@ -1,13 +1,9 @@
 import { useState } from 'react';
-
-// material-ui
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
-// project import
 import MainCard from 'components/MainCard';
 import IncomeAreaChart from './IncomeAreaChart';
 

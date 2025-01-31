@@ -1,12 +1,8 @@
 import { useState } from 'react';
-
-// material-ui
 import Grid from '@mui/material/Grid';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-
-// project import
 import SalesChart from './SalesChart';
 
 // sales report status

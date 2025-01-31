@@ -89,7 +89,7 @@ export default function EndPointList() {
         <>
         <h3>End-Points List</h3>
   <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-        <TableContainer sx={{ maxHeight: 470 }}>
+        <TableContainer sx={{ maxHeight: 515 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>

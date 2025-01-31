@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-
-// material-ui
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Checkbox from '@mui/material/Checkbox';
@@ -10,11 +8,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
-// project import
 import MainCard from 'components/MainCard';
-
-// third-party
 import ReactApexChart from 'react-apexcharts';
 
 // chart options

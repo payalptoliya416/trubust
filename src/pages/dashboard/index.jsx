@@ -1,14 +1,12 @@
-// material-ui
+
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import { CiCreditCard1 } from "react-icons/ci";
 import { BsDiagram2 } from "react-icons/bs";
-// project import
 import MainCard from 'components/MainCard';
 import AnalyticEcommerce from 'components/cards/statistics/AnalyticEcommerce';
 import UniqueVisitorCard from './UniqueVisitorCard';
 import OrdersTable from './OrdersTable';
-
 import { useEffect, useState } from 'react';
 import { fetchAnalyticRequest, fetchAnalyticUsers, fetchTotalCompany } from 'api/Data';
 
@@ -79,12 +77,10 @@ try {
 }
 }
 
-
   return (
     <>
       {permissions.menu === 1 && (
       <Grid container rowSpacing={4.5} columnSpacing={2.75}>
-        {/* row 1 */}
         <Grid item xs={12} sx={{ mb: -2.25 }}>
           <Typography variant="h5">Dashboard</Typography>
         </Grid>

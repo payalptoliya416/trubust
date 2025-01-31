@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-// material-ui
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Table from '@mui/material/Table';
@@ -11,50 +10,14 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-// third-party
-import { NumericFormat } from 'react-number-format';
-
-// project import
 import Dot from 'components/@extended/Dot';
 
-function createData(tracking_no, name, fat, carbs, protein) {
-  return { tracking_no, name, fat, carbs, protein };
-}
-
-const rows = [
-  createData(84564564, 'Camera Lens', 40, 2),
-];
-
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-// function getComparator(order, orderBy) {
-//   return order === 'desc' ? (a, b) => descendingComparator(a, b, orderBy) : (a, b) => -descendingComparator(a, b, orderBy);
-// }
 function getComparator(order, orderBy) {
   return order === 'desc'
     ? (a, b) => (b[orderBy] < a[orderBy] ? -1 : 1)
     : (a, b) => (a[orderBy] < b[orderBy] ? -1 : 1);
 }
 
-// function stableSort(array, comparator) {
-//   const stabilizedThis = array.map((el, index) => [el, index]);
-//   stabilizedThis.sort((a, b) => {
-//     const order = comparator(a[0], b[0]);
-//     if (order !== 0) {
-//       return order;
-//     }
-//     return a[1] - b[1];
-//   });
-//   return stabilizedThis.map((el) => el[0]);
-// }
 function stableSort(array, comparator) {
   if (!Array.isArray(array)) return [];
   const stabilizedArray = array.map((el, index) => [el, index]);
@@ -65,14 +28,16 @@ function stableSort(array, comparator) {
   });
   return stabilizedArray.map((el) => el[0]);
 }
+const loginCompanyID =  JSON.parse(localStorage.getItem('logindetail')) || [];
+const ID = loginCompanyID.companyID
 
+ const companyName = ID === 0 ? "Companies" : "Users";
 
-//  const companyName = ID === 0 ? "Companies" : "Users"
 const headCells = [
   {
     id: 'name',
     align: 'center',
-    label: 'companyName'
+    label: companyName
   },
   {
     id: 'name',
@@ -82,7 +47,8 @@ const headCells = [
   {
     id: 'total_users',
     align: 'center',
-    label: 'Users'
+    label: 'Users',
+    hide: ID !== 0,
   },
   {
     id: 'carbs',
@@ -91,10 +57,9 @@ const headCells = [
   },
  
 ];
-
 // ==============================|| ORDER TABLE - HEADER ||============================== //
 
-function OrderTableHead({ order, orderBy ,ID }) {
+function OrderTableHead({ order, orderBy , ID }) {
   return (
     <TableHead>
       <TableRow>
@@ -149,7 +114,6 @@ export default function OrderTable(props) {
   const {ID , data} = props;
   const order = 'asc';
   const orderBy = 'tracking_no';
-
   return (
     <Box>
       <TableContainer
@@ -166,7 +130,7 @@ export default function OrderTable(props) {
           <OrderTableHead order={order} orderBy={orderBy} ID={ID} />
           <TableBody>
   {stableSort(Array.isArray(data) ? data : [], getComparator(order, orderBy)).map((row, index) => {
-    const labelId = `enhanced-table-checkbox-${index}`;
+    const labelId = `enhanced-datatable-checkbox-${index}`;
 
     return (
       <TableRow

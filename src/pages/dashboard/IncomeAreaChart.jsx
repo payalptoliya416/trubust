@@ -1,10 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-
-// material-ui
 import { useTheme } from '@mui/material/styles';
-
-// third-party
 import ReactApexChart from 'react-apexcharts';
 
 // chart options
