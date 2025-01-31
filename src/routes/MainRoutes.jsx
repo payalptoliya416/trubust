@@ -6,9 +6,6 @@ import Dashboard from 'layout/Dashboard';
 import ProtectedRoute from './ProtectedRoute';
 import NotFound from 'pages/404/NotFound';
 
-// const Color = Loadable(lazy(() => import('pages/component-overview/color')));
-// const Typography = Loadable(lazy(() => import('pages/component-overview/typography')));
-// const Shadow = Loadable(lazy(() => import('pages/component-overview/shadows')));
 const Company = Loadable(lazy(() => import('pages/company/Company')));
 const SingleCompanyView = Loadable(lazy(() => import('pages/company/SingleCompanyView')));
 const EditCompany = Loadable(lazy(() => import('pages/company/EditCompany')));
@@ -28,9 +25,6 @@ const ErrorLogs = Loadable(lazy(() => import('pages/logs/ErrorLogs')));
 const Logs = Loadable(lazy(() => import('pages/logs/Logs')));
 const AddPermission = Loadable(lazy(() => import('pages/admin-user/AddPermission')));
 const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
-
-// render - sample page
-// const SamplePage = Loadable(lazy(() => import('pages/extra-pages/sample-page')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 

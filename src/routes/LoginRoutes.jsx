@@ -1,8 +1,9 @@
-import { lazy } from 'react';
+  import { lazy } from 'react';
 
 // project import
 import Loadable from 'components/Loadable';
 import MinimalLayout from 'layout/MinimalLayout';
+import { Navigate } from 'react-router';
 
 // render - login
 const AuthLogin = Loadable(lazy(() => import('pages/authentication/login')));
@@ -14,6 +15,10 @@ const LoginRoutes = {
   path: '/',
   element: <MinimalLayout />,
   children: [
+    {
+      path: '/',
+      element: <Navigate to="/login" /> // Redirect to /login when visiting root path
+    },
     {
       path: '/login',
       element: <AuthLogin />
