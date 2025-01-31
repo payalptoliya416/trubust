@@ -1,4 +1,5 @@
 // assets
+import { useEffect, useState } from 'react';
 import {
   AppstoreAddOutlined,
   AntDesignOutlined,
@@ -15,6 +16,9 @@ import { CgInternal } from "react-icons/cg";
 import { PiWechatLogoFill } from "react-icons/pi";
 import { GrUserAdmin } from "react-icons/gr";
 import { MdOutlineError } from "react-icons/md";
+import { FaCogs } from "react-icons/fa";
+import { RiAdminLine } from "react-icons/ri";
+
 // icons
 const icons = {
   FontSizeOutlined,
@@ -30,7 +34,9 @@ const icons = {
   CgInternal ,
   PiWechatLogoFill,
   GrUserAdmin ,
-  MdOutlineError 
+  MdOutlineError ,
+  RiAdminLine ,
+  FaCogs
 };
 
 // ==============================|| MENU ITEMS - UTILITIES ||============================== //
@@ -94,14 +100,14 @@ const utilities = {
           title: 'Admin',
           type: 'item',
           url: '/admin',
-          icon: icons.FaList
+          icon: icons.RiAdminLine 
         },
         {
           id: 'role-permission',
           title: 'Role & Permission',
           type: 'item',
           url: '/role-permission',
-          icon: icons.FaCog
+          icon: icons.FaCogs
         }
       ]
     },
