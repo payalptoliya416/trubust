@@ -1,6 +1,4 @@
 import { RouterProvider } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-
 import router from 'routes';
 import ThemeCustomization from 'themes';
 import ScrollTop from 'components/ScrollTop';
