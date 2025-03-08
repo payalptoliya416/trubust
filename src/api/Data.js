@@ -49,7 +49,7 @@ export const fetchAnalyticRequest = async (id) => {
       : `${BASE_URL}dashboard/Counter`;
     const response = await fetch(url, {
       headers: {
-        'Authorization': `Bearer ${authToken}`
+        'Authorization': `Bearer ${authToken}`  
       }
     });
 

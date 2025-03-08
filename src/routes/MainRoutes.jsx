@@ -28,7 +28,7 @@ const DashboardDefault = Loadable(lazy(() => import('pages/dashboard/index')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
-const MainRoutes = {
+const MainRoutes = {  
   path: '/',
   element: <ProtectedRoute  />,
   id: 'group-dashboard',

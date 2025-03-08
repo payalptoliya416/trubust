@@ -14,7 +14,7 @@ const dashboard = {
   type: 'group',
   children: [
     {
-      id: 'dashboard',
+      id: "analytics",
       title: 'Dashboard',
       type: 'item',
       url: '/',

@@ -8,18 +8,28 @@ import Box from '@mui/material/Box';
 import NavItem from './NavItem';
 import { useGetMenuMaster } from 'api/menu';
 import CollapseItem from './CollapseItem';
-
+import { useEffect, useState } from 'react';
 export default function NavGroup({ item }) {
   const { menuMaster } = useGetMenuMaster();
   const drawerOpen = menuMaster.isDashboardDrawerOpened;
-
+ 
+  const [logResponse, setLogResponse] = useState([]);
+  useEffect(() => {
+    const storedPermissions = JSON.parse(localStorage.getItem('permissions'));
+    if (storedPermissions) {
+      setLogResponse(storedPermissions);
+    }
+  }, []);
+  const hasPermission = (permissionName) => {
+    return logResponse.some(item => item.name === permissionName);
+  };
   const navCollapse = item.children?.map((menuItem) => {
+    if (!hasPermission(menuItem.id)) {
+      return null; 
+    }
     switch (menuItem.type) {
       case 'collapse':
         return (
-          // <Typography key={menuItem.id} variant="caption" color="error" sx={{ p: 2.5 }}>
-          //   collapse - only available in paid version
-          // </Typography>
              <CollapseItem key={menuItem.id} item={menuItem} level={1}/> 
         );
       case 'item':

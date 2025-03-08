@@ -62,35 +62,35 @@ const utilities = {
       icon: icons.FaUser 
     },
     {
-      id: 'support-ticket',
+      id: 'ticket',
       title: 'Support Ticket',
       type: 'item',
       url: '/support-ticket',
       icon: icons.FaTicket
     },
     {
-      id: 'external-request',
+      id: '"request"',
       title: 'External Request',
       type: 'item',
       url: '/external-request',
       icon: icons.IoGitPullRequestSharp 
     },
     {
-      id: 'internal-request',
+      id: 'internal',
       title: 'Internal Request',
       type: 'item',
       url: '/internal-request',
       icon: icons.CgInternal
     },
     {
-      id: 'secure-channel',
+      id: 'groupchat',
       title: 'Secure Channel',
       type: 'item',
       url: '/secure-channel',
       icon: icons.PiWechatLogoFill
     },
     {
-      id: 'admin-users',
+      id: "adminuser",
       title: 'Admin Users',
       type: 'collapse', 
       icon: icons.GrUserAdmin,
@@ -103,7 +103,7 @@ const utilities = {
           icon: icons.RiAdminLine 
         },
         {
-          id: 'role-permission',
+          id: 'role',
           title: 'Role & Permission',
           type: 'item',
           url: '/role-permission',
